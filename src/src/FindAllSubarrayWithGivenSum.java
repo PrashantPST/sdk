@@ -31,5 +31,8 @@ class FindAllSubarrayWithGivenSum {
         int[] A = { 1, -1, -1, 1, -1, 1, 1 };
         int sum = 0;
         printallSubarrays(A, sum);
+        HashMap<Integer, Integer> hash_map = new HashMap<>();
+        ArrayList<Integer> l = (ArrayList<Integer>) hash_map.values();
+        Collections.sort(l);
     }
 }
