@@ -28,8 +28,8 @@ class FindAllSubarrayWithGivenSum {
         }
     }
     public static void main (String[] args) {
-        int[] A = { 3, 4, -7, 1, 3, 3, 1, -4 };
-        int sum = 7;
+        int[] A = { 1, -1, -1, 1, -1, 1, 1 };
+        int sum = 0;
         printallSubarrays(A, sum);
     }
 }
