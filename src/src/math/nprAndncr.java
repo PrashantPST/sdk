@@ -1,3 +1,5 @@
+package math;
+
 public class nprAndncr {
     public static void main(String[] args) {
         int n = 5;

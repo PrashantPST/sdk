@@ -1,4 +1,4 @@
-package ll;
+package linkedlist;
 
 import java.util.LinkedList;
 
