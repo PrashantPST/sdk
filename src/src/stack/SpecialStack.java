@@ -6,28 +6,31 @@ package stack;
  * All these operations of SpecialStack must be O(1).
  */
 
+import java.util.EmptyStackException;
 import java.util.Stack;
 
 class SpecialStack extends Stack<Integer> {
     private Stack<Integer> min = new Stack<>();
     private void push(int x) {
-        if(isEmpty()) {
-            super.push(x);
+        super.push(x);
+        if(min.isEmpty())
             min.push(x);
-        }
         else {
-            super.push(x);
             int y = min.peek();
-            min.push(x < y ? x : y);
+            if(x <= y)
+                min.push(x);
         }
     }
     public Integer pop() {
-        min.pop();
+        if(isEmpty())
+            throw new EmptyStackException();
+        Integer a = peek();
+        if(a <= min.peek())
+            min.pop();
         return super.pop();
     }
-    private int getMin() {
-        return min.peek();
-    }
+    private int getMin() { return min.peek(); }
+
     public static void main(String[] args) {
         SpecialStack s = new SpecialStack();
         s.push(10);
@@ -38,6 +41,7 @@ class SpecialStack extends Stack<Integer> {
         System.out.println(s.getMin());
         s.pop();
         s.pop();
+        s.push(12);
         System.out.println(s.getMin());
         s.pop();
         System.out.println(s.getMin());

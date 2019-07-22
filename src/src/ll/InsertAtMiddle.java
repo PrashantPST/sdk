@@ -1,4 +1,4 @@
-package linkedlist;
+package ll;
 
 class InsertAtMiddle {
     private static Node head;
