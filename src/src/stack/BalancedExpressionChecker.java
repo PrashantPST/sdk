@@ -4,28 +4,28 @@ import java.util.Stack;
 
 public class BalancedExpressionChecker {
     public static void main(String[] args) {
-        char[] exp = {'{', '(', ')', '}', '}', ']'};
-        if (areParenthesisBalanced(exp))
-            System.out.println("Balanced ");
+        String expr = "{()}}]}";
+        if (balanced(expr.toCharArray()))
+            System.out.println("Balanced Expression");
         else
-            System.out.println("UnBalanced ");
+            System.out.println("Unbalanced Expression");
     }
 
-    private static boolean areParenthesisBalanced(char[] exp) {
-        Stack<Character> st = new Stack<>();
-        for (char c : exp) {
-            if (c == '{' || c == '(' || c == '[')
-                st.push(c);
-            if (c == '}' || c == ')' || c == ']') {
-                if (st.isEmpty())
+    private static boolean balanced(char[] exp) {
+        Stack<Character> stack= new Stack<>();
+        for (char ch: exp) {
+            if (ch == '{' || ch == '(' || ch == '[')
+                stack.push(ch);
+            if (ch == '}' || ch == ')' || ch == ']') {
+                if (stack.isEmpty())
                     return false;
-                else if (!isMatchingPair(st.pop(), c))
+                else if (!matchingPair(stack.pop(), ch))
                     return false;
             }
         }
-        return st.isEmpty();
+        return stack.isEmpty();
     }
-    private static boolean isMatchingPair(char character1, char character2) {
+    private static boolean matchingPair(char character1, char character2) {
         if (character1 == '(' && character2 == ')')
             return true;
         else if (character1 == '{' && character2 == '}')
