@@ -1,3 +1,5 @@
+package src;
+
 /*
  * Factorial should be calculated iteratively as recursion can be costly for large numbers.
  */

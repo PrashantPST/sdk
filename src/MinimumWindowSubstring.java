@@ -1,3 +1,5 @@
+package src;
+
 public class MinimumWindowSubstring {
     private static final int nChars = 256;
     private static String findSubString(String str, String pat) {

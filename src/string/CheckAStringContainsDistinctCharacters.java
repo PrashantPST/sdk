@@ -1,4 +1,4 @@
-package string;
+package src.string;
 
 public class CheckAStringContainsDistinctCharacters {
     public static void main(String[] args) {

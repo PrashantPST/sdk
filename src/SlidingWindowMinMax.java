@@ -1,8 +1,10 @@
+package src;
+
 import java.util.Arrays;
 import java.util.Stack;
 
 /*
- * PS:=> Find maximum of minimum for every possible window size [1, N] of a given array.
+ * PS:=> Find maximum of minimum for every possible window size [1, N] of a given linear.array.
  */
 public class SlidingWindowMinMax {
     public static void main(String[] args) {

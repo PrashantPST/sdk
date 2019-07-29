@@ -1,4 +1,4 @@
-package dp;
+package src.algorithm.dp;
 
 public class GeneralizedStaircaseProblem {
     private static final int MAX_STEPS = 2;

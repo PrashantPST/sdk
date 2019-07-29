@@ -1,3 +1,5 @@
+package src;
+
 public class PatternMatching {
     private final static int d = 256;
     private static void search(String pattern, String text, int q) {

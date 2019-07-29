@@ -1,4 +1,4 @@
-package stack;
+package src.ds.linear.stack;
 
 import java.util.EmptyStackException;
 import java.util.Stack;

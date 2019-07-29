@@ -1,7 +1,7 @@
-package stack;
+package src.ds.linear.stack;
 
 /*
- * Design a Data Structure GetMinExtendedStack that supports all the stack operations like push(), pop(), isEmpty(), isFull()
+ * Design a Data Structure GetMinExtendedStack that supports all the linear.stack operations like push(), pop(), isEmpty(), isFull()
  * and an additional operation min() which should return the minimum element.
  * All these operations must be O(1).
  */

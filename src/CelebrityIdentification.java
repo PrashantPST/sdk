@@ -1,3 +1,5 @@
+package src;
+
 /*
  * PS:-> A celebrity is person that is known by every other person, but (s)he does not know any of them.
  *
