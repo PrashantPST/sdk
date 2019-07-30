@@ -1,4 +1,4 @@
-package src.math;
+package src.maths;
 
 public class nprAndncr {
     public static void main(String[] args) {
