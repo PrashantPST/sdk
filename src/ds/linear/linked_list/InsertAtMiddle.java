@@ -1,4 +1,4 @@
-package src.ds.linear.linked_list;
+package ds.linear.linked_list;
 
 class InsertAtMiddle {
     private static Node head;

@@ -1,4 +1,4 @@
-package src.bit_manipulation;
+package bit_manipulation;
 
 public class BitDemo {
     public static void main(String[] args) {
