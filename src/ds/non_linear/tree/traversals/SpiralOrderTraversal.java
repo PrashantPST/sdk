@@ -1,15 +1,7 @@
 package src.ds.non_linear.tree.traversals;
 
-
+import src.ds.non_linear.tree.TreeNode;
 import java.util.Stack;
-
-class TreeNode {
-    int data;
-    TreeNode left, right;
-    TreeNode(int item) {
-        data = item;
-    }
-}
 
 class SpiralOrderTraversal {
 

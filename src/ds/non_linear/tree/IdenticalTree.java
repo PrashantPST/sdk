@@ -1,18 +1,7 @@
 package src.ds.non_linear.tree;
 
-class TreeNode {
-    int value;
-    TreeNode left;
-    TreeNode right;
-
-    TreeNode(int val) {
-        this.value = val;
-    }
-}
-
 public class IdenticalTree {
     public static void main(String[] args) {
-        // construct first tree
         TreeNode x = new TreeNode(15);
         x.left = new TreeNode(10);
         x.right = new TreeNode(20);
@@ -21,7 +10,6 @@ public class IdenticalTree {
         x.right.left = new TreeNode(16);
         x.right.right = new TreeNode(25);
 
-        // construct second tree
         TreeNode y = new TreeNode(15);
         y.left = new TreeNode(10);
         y.right = new TreeNode(20);
@@ -41,6 +29,6 @@ public class IdenticalTree {
         if (p == null && q == null) {
             return true;
         }
-        return ((p != null && q != null) && p.value == q.value && identicalTree(p.left, q.left) && identicalTree(p.right, q.right));
+        return ((p != null && q != null) && p.data == q.data && identicalTree(p.left, q.left) && identicalTree(p.right, q.right));
     }
 }
