@@ -22,15 +22,19 @@ public class TreeNode {
             return 0;
         return (1 + Math.max(height(root.left), height(root.right)));
     }
+
     private static void preOrderTraversal(TreeNode root) {
 
     }
+
     private static void inOrderTraversal(TreeNode root) {
 
     }
+
     private static void postOrderTraversal(TreeNode root) {
 
     }
+
     private void levelOrderTraversal(TreeNode root) {
         Queue<TreeNode> q = new LinkedList<>();
         if(root == null) return;
@@ -99,5 +103,18 @@ public class TreeNode {
     }
     public static boolean isBalanced(TreeNode root) {
         return balanced(root) > -1;
+    }
+
+    private static void topView(TreeNode root) {
+
+    }
+    private static void bottomView(TreeNode root) {
+
+    }
+    private static void leftView(TreeNode root) {
+
+    }
+    private static void rightView(TreeNode root) {
+
     }
 }
