@@ -1,4 +1,4 @@
-package src.ds.linear.stack;
+package ds.linear.stack;
 
 /*
  * Design a Data Structure GetMinExtendedStack that supports all the linear.stack operations like push(), pop(), isEmpty(), isFull()

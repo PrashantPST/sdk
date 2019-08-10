@@ -1,15 +1,6 @@
-package src.strings;
+package strings;
 
 public class Anagram {
-    public static void main(String[] args) {
-        String str1 = "abcde";
-        String str2 = "bcdaa";
-        if (areAnagram(str1, str2))
-            System.out.println("The two strings are anagram of each other");
-        else
-            System.out.println("The two strings are not anagram of each other");
-
-    }
 
     private static boolean areAnagram(String str1, String str2) {
         if (str1.length() != str2.length())

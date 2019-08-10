@@ -1,15 +1,8 @@
-package src.ds.linear.stack;
+package ds.linear.stack;
 
 import java.util.Stack;
 
-public class BalancedExpressionChecker {
-    public static void main(String[] args) {
-        String expr = "{()}}]}";
-        if (balanced(expr.toCharArray()))
-            System.out.println("Balanced Expression");
-        else
-            System.out.println("Unbalanced Expression");
-    }
+public class StackADT {
 
     private static boolean balanced(char[] exp) {
         Stack<Character> stack= new Stack<>();
@@ -19,13 +12,13 @@ public class BalancedExpressionChecker {
             if (ch == '}' || ch == ')' || ch == ']') {
                 if (stack.isEmpty())
                     return false;
-                else if (!matchingPair(stack.pop(), ch))
+                else if (!_matchingPair(stack.pop(), ch))
                     return false;
             }
         }
         return stack.isEmpty();
     }
-    private static boolean matchingPair(char character1, char character2) {
+    private static boolean _matchingPair(char character1, char character2) {
         if (character1 == '(' && character2 == ')')
             return true;
         else if (character1 == '{' && character2 == '}')

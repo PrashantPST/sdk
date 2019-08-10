@@ -1,12 +1,6 @@
-package src.maths;
+package maths;
 
-public class nprAndncr {
-    public static void main(String[] args) {
-        int n = 5;
-        int r = 2;
-        System.out.println(n+"P"+r+" = "+nPr(n, r));
-        System.out.println(n+"C"+r+" = "+nCr(n, r));
-    }
+public class MathUtil {
 
     /*
      * The value of C(n, r) can be calculated in O(r) time and O(1) extra space.
@@ -30,5 +24,14 @@ public class nprAndncr {
         while(r-- > 0)
             res *= n--;
         return res;
+    }
+    public static long factorial(int n) {
+        if(n <= 2)
+            return n;
+        long result = 1;
+        int i = 1;
+        while (++i <= n)
+            result *= i;
+        return result;
     }
 }

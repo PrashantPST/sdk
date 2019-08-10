@@ -1,4 +1,4 @@
-package src.ds.linear.stack;
+package ds.linear.stack;
 
 import java.util.EmptyStackException;
 import java.util.Stack;
@@ -26,7 +26,7 @@ public class ExpressionConversion {
         try {
             Stack<String> infixExpr = new Stack<>();
             for (int i = expr.length() - 1; i >= 0; i--) {
-                if (isOperator(expr.charAt(i))) {
+                if (_isOperator(expr.charAt(i))) {
                     String operand1 = infixExpr.pop();
                     String operand2 = infixExpr.pop();
                     infixExpr.push("(" + operand1 + " " + expr.charAt(i) + " " + operand2 + ")");
@@ -45,7 +45,7 @@ public class ExpressionConversion {
         try {
             Stack<String> postfixExpr = new Stack<>();
             for (int i = expr.length() - 1; i >= 0; i--) {
-                if (isOperator(expr.charAt(i)))
+                if (_isOperator(expr.charAt(i)))
                     postfixExpr.push(postfixExpr.pop() + postfixExpr.pop() + expr.charAt(i));
                 else
                     postfixExpr.push(String.valueOf(expr.charAt(i)));
@@ -85,7 +85,7 @@ public class ExpressionConversion {
                     else
                         operator.pop();
                 } else {
-                    while (!operator.isEmpty() && precedence(ch) <= precedence(operator.peek())) {
+                    while (!operator.isEmpty() && _precedence(ch) <= _precedence(operator.peek())) {
                         if (operator.peek() == '(')
                             return "Invalid Infix Expression";
                         result.append(operator.pop());
@@ -101,7 +101,7 @@ public class ExpressionConversion {
         System.out.println("Postfix Expression => "+expr);
         Stack<String> prefixExpr = new Stack<>();
         for (int i = 0; i < expr.length(); i++) {
-            if (isOperator(expr.charAt(i))) {
+            if (_isOperator(expr.charAt(i))) {
                 String operand2 = prefixExpr.pop();
                 String operand1 = prefixExpr.pop();
                 prefixExpr.push(expr.charAt(i) + operand1 + operand2);
@@ -114,7 +114,7 @@ public class ExpressionConversion {
     private static String postfixToInfix(String expr) {
             Stack<String> infixExpr = new Stack<>();
             for (int i = 0; i < expr.length(); i++) {
-                if (isOperator(expr.charAt(i))) {
+                if (_isOperator(expr.charAt(i))) {
                     String operand2 = infixExpr.pop();
                     String operand1 = infixExpr.pop();
                     infixExpr.push("(" + operand1 + " " + expr.charAt(i) + " " + operand2 + ")");
@@ -124,7 +124,7 @@ public class ExpressionConversion {
             return infixExpr.pop();
     }
 
-    private static boolean isOperator(char x) {
+    private static boolean _isOperator(char x) {
         switch (x) {
             case '+':
             case '-':
@@ -138,7 +138,7 @@ public class ExpressionConversion {
 
     private static class InvalidInputExpression extends Throwable {
     }
-    private static int precedence(char ch) {
+    private static int _precedence(char ch) {
         switch (ch) {
             case '+':
             case '-':
