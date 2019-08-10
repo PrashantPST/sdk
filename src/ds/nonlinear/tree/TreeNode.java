@@ -24,15 +24,27 @@ public class TreeNode {
     }
 
     private static void preOrderTraversal(TreeNode root) {
-
+        if (root == null)
+            return;
+        System.out.print(root.data + " ");
+        preOrderTraversal(root.left);
+        preOrderTraversal(root.right);
     }
 
     private static void inOrderTraversal(TreeNode root) {
-
+        if (root == null)
+            return;
+        inOrderTraversal(root.left);
+        System.out.print(root.data + " ");
+        inOrderTraversal(root.right);
     }
 
     private static void postOrderTraversal(TreeNode root) {
-
+        if (root == null)
+            return;
+        postOrderTraversal(root.left);
+        postOrderTraversal(root.right);
+        System.out.print(root.data + " ");
     }
 
     private void levelOrderTraversal(TreeNode root) {
