@@ -6,6 +6,16 @@ package ds.nonlinear.tree;
 
 import java.util.*;
 
+class _ExtendedTree {
+    TreeNode node;
+    int hd;
+
+    _ExtendedTree(TreeNode node, int hd) {
+        this.node = node;
+        this.hd = hd;
+    }
+}
+
 public class TreeNode {
     private int data;
     public TreeNode left;
@@ -62,7 +72,7 @@ public class TreeNode {
         }
     }
 
-    public static void spiralOrderTraversal(TreeNode root) {
+    public static void spiralTraversal(TreeNode root) {
         if (root == null)
             return;
 
@@ -91,15 +101,36 @@ public class TreeNode {
     }
 
     public static void verticalTraversal(TreeNode root) {
-        TreeMap<Integer, List<Integer>> horizontalDistances = _verticalOrder(root, 0);
-        if (horizontalDistances != null) {
-            horizontalDistances.forEach((k, v) -> System.out.println("Nodes at distance " + k + " = " + v));
-        }
-    }
+        Queue<_ExtendedTree> q = new LinkedList<>();
+        Map<Integer, List<Integer>> verticalView = new TreeMap<>();
 
-    private static TreeMap<Integer, List<Integer>> _verticalOrder(TreeNode root, int hd) {
-        if (null == root)
-            return null;
+        if (root == null) {
+            return;
+        } else {
+            q.add(new _ExtendedTree(root, 0));
+        }
+
+        while (!q.isEmpty()) {
+            _ExtendedTree tmpNode = q.poll();
+            if (!verticalView.containsKey(tmpNode.hd)) {
+                List<Integer> l = new ArrayList<>();
+                l.add(tmpNode.node.data);
+                verticalView.put(tmpNode.hd, l);
+            }
+            else {
+                verticalView.get(tmpNode.hd).add(tmpNode.node.data);
+            }
+            if (tmpNode.node.left != null) {
+                q.add(new _ExtendedTree(tmpNode.node.left, tmpNode.hd - 1));
+            }
+            if (tmpNode.node.right != null) {
+                q.add(new _ExtendedTree(tmpNode.node.right, tmpNode.hd + 1));
+            }
+
+        }
+        for (Map.Entry<Integer, List<Integer>> nodes : verticalView.entrySet()) {
+            System.out.println(nodes.getKey()+" -> "+nodes.getValue());
+        }
 
     }
 
@@ -114,12 +145,10 @@ public class TreeNode {
             return 0;
         }
         int lHeight = _balanced(root.left);
-        System.out.println("left height = "+lHeight);
         if (lHeight == -1) {
             return -1;
         }
         int rHeight = _balanced(root.right);
-        System.out.println("right height = "+rHeight);
         if (rHeight == -1) {
             return -1;
         }
@@ -133,7 +162,29 @@ public class TreeNode {
     }
 
     public static void topView(TreeNode root) {
+        Queue<_ExtendedTree> q = new LinkedList<>();
+        Map<Integer, Integer> topView = new TreeMap<>();
 
+        if (root == null) {
+            return;
+        } else {
+            q.add(new _ExtendedTree(root, 0));
+        }
+
+        while (!q.isEmpty()) {
+            _ExtendedTree tmpNode = q.poll();
+            if (!topView.containsKey(tmpNode.hd)) {
+                topView.put(tmpNode.hd, tmpNode.node.data);
+            }
+            if (tmpNode.node.left != null) {
+                q.add(new _ExtendedTree(tmpNode.node.left, tmpNode.hd - 1));
+            }
+            if (tmpNode.node.right != null) {
+                q.add(new _ExtendedTree(tmpNode.node.right, tmpNode.hd + 1));
+            }
+
+        }
+        System.out.println(topView.values());
     }
 
     private static void bottomView(TreeNode root) {
