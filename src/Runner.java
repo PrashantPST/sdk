@@ -1,7 +1,6 @@
 import ds.nonlinear.tree.TreeNode;
 
-import static ds.nonlinear.tree.TreeNode.topView;
-import static ds.nonlinear.tree.TreeNode.verticalTraversal;
+import static ds.nonlinear.tree.TreeNode.*;
 
 public class Runner {
     public static void main(String[] args) {
@@ -30,7 +29,8 @@ public class Runner {
         n10.right = n11;
         n11.right = n12;
 
-        verticalTraversal(root);
-        topView(root);
+        System.out.println(verticalTraversal(root));
+        System.out.println(topView(root));
+        System.out.println(bottomView(root));
     }
 }

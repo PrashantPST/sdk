@@ -55,7 +55,7 @@ public class TreeNode {
         System.out.print(root.data + " ");
     }
 
-    private void levelOrderTraversal(TreeNode root) {
+    public static void levelOrderTraversal(TreeNode root) {
         Queue<TreeNode> q = new LinkedList<>();
         if(root == null) return;
         int levelNodes;
@@ -100,12 +100,12 @@ public class TreeNode {
         }
     }
 
-    public static void verticalTraversal(TreeNode root) {
+    public static Map<Integer, List<Integer>> verticalTraversal(TreeNode root) {
         Queue<_ExtendedTree> q = new LinkedList<>();
         Map<Integer, List<Integer>> verticalView = new TreeMap<>();
 
         if (root == null) {
-            return;
+            return verticalView;
         } else {
             q.add(new _ExtendedTree(root, 0));
         }
@@ -128,10 +128,7 @@ public class TreeNode {
             }
 
         }
-        for (Map.Entry<Integer, List<Integer>> nodes : verticalView.entrySet()) {
-            System.out.println(nodes.getKey()+" -> "+nodes.getValue());
-        }
-
+        return verticalView;
     }
 
     private static boolean identical(TreeNode p, TreeNode q) {
@@ -161,42 +158,73 @@ public class TreeNode {
         return _balanced(root) > -1;
     }
 
-    public static void topView(TreeNode root) {
-        Queue<_ExtendedTree> q = new LinkedList<>();
-        Map<Integer, Integer> topView = new TreeMap<>();
-
-        if (root == null) {
-            return;
-        } else {
-            q.add(new _ExtendedTree(root, 0));
+    public static List<Integer> topView(TreeNode root) {
+        Map<Integer, List<Integer>> verticalView = verticalTraversal(root);
+        List<Integer> res = new ArrayList<>();
+        for(Map.Entry<Integer, List<Integer>> m: verticalView.entrySet()) {
+            List<Integer> temp = m.getValue();
+            res.add(temp.get(0));
         }
+        return res;
+    }
 
+    public static List<Integer> bottomView(TreeNode root) {
+        Map<Integer, List<Integer>> verticalView = verticalTraversal(root);
+        List<Integer> res = new ArrayList<>();
+        for(Map.Entry<Integer, List<Integer>> m: verticalView.entrySet()) {
+            List<Integer> temp = m.getValue();
+            res.add(temp.get(temp.size() - 1));
+        }
+        return res;
+    }
+
+    public static List<Integer> leftView(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+
+        if(root == null) return res;
+        int levelNodes;
+        boolean flag;
+        while (!queue.isEmpty()) {
+            flag = true;
+            levelNodes = queue.size();
+            while (levelNodes-- > 0) {
+                TreeNode curr = queue.poll();
+                if (flag)
+                    res.add(curr.data);
+                flag = false;
+                if (null != curr) {
+                    if (curr.left != null) queue.add(curr.left);
+                    if (curr.right != null) queue.add(curr.right);
+                }
+            }
+        }
+        return res;
+    }
+
+    public static List<Integer> rightView(TreeNode root) {
+        Queue<TreeNode> q = new LinkedList<>();
+        List<Integer> res = new ArrayList<>();
+        q.add(root);
         while (!q.isEmpty()) {
-            _ExtendedTree tmpNode = q.poll();
-            if (!topView.containsKey(tmpNode.hd)) {
-                topView.put(tmpNode.hd, tmpNode.node.data);
+            int queueSize = q.size();
+            while(queueSize > 0) {
+                TreeNode current = q.poll();
+                if (current != null) {
+                    if (queueSize == 1)
+                        res.add(current.data);
+                    if (current.left != null) {
+                        q.add(current.left);
+                    }
+                    if (current.right != null) {
+                        q.add(current.right);
+                    }
+                    queueSize--;
+                }
             }
-            if (tmpNode.node.left != null) {
-                q.add(new _ExtendedTree(tmpNode.node.left, tmpNode.hd - 1));
-            }
-            if (tmpNode.node.right != null) {
-                q.add(new _ExtendedTree(tmpNode.node.right, tmpNode.hd + 1));
-            }
-
         }
-        System.out.println(topView.values());
-    }
-
-    private static void bottomView(TreeNode root) {
-
-    }
-
-    private static void leftView(TreeNode root) {
-
-    }
-
-    private static void rightView(TreeNode root) {
-
+        return res;
     }
 
     private static boolean isValidBST(TreeNode root) {
