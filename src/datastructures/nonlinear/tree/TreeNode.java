@@ -55,7 +55,7 @@ public class TreeNode {
         System.out.print(root.data + " ");
     }
 
-    public static void levelOrderTraversal(TreeNode root) {
+    public static void levelOrder(TreeNode root) {
         Queue<TreeNode> q = new LinkedList<>();
         if(root == null) return;
         int levelNodes;
@@ -227,12 +227,11 @@ public class TreeNode {
         return res;
     }
 
-    private static boolean isValidBST(TreeNode root) {
-        return false;
+    // lowest common ancestor is also known as the least common ancestor.
+    public static TreeNode lowestCommonAncestor(TreeNode root, int v, int w) {
+
     }
-    public static TreeNode lowestCommonAncestor(TreeNode node1, TreeNode node2) {
-        return null;
-    }
+
     private static int verticalOrderSum(TreeNode root) {
         return 0;
     }
