@@ -1,7 +1,7 @@
 package datastructures.nonlinear.tree;
 
 /*
- * @author Prashant
+ * @author Prashant Kumar
  */
 
 import java.util.*;
@@ -17,7 +17,7 @@ class _ExtendedTree {
 }
 
 public class TreeNode {
-    private int data;
+    public int data;
     public TreeNode left;
     public TreeNode right;
 
@@ -29,6 +29,10 @@ public class TreeNode {
         if (root == null)
             return 0;
         return (1 + Math.max(height(root.left), height(root.right)));
+    }
+
+    private static int diameter(TreeNode roo) {
+        return 0;
     }
 
     private static void preOrderTraversal(TreeNode root) {
@@ -227,9 +231,19 @@ public class TreeNode {
         return res;
     }
 
-    // lowest common ancestor is also known as the least common ancestor.
-    public static TreeNode lowestCommonAncestor(TreeNode root, int v, int w) {
+    // lowest/least common ancestor
+    public static TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
 
+        if (root == null) return null;
+        if (root.data == p.data || root.data == q.data) return root;
+
+        TreeNode leftSearchResult = lowestCommonAncestor(root.left, p, q);
+        TreeNode rightSearchResult = lowestCommonAncestor(root.right, p, q);
+
+        if (leftSearchResult == null) return rightSearchResult;
+        if (rightSearchResult == null) return leftSearchResult;
+
+        return root;
     }
 
     private static int verticalOrderSum(TreeNode root) {

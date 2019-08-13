@@ -1,4 +1,4 @@
-package bit_manipulation;
+package bits;
 
 public class Bit {
 

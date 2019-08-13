@@ -29,6 +29,6 @@ public class Runner {
         n10.right = n11;
         n11.right = n12;
 
-        System.out.println(lowestCommonAncestor(n3, n4));
+        System.out.println(lowestCommonAncestor(root, n12, n9).data);
     }
 }
