@@ -1,4 +1,4 @@
-package ds.nonlinear.tree;
+package datastructures.nonlinear.tree;
 
 /*
  * @author Prashant
@@ -100,7 +100,7 @@ public class TreeNode {
         }
     }
 
-    public static Map<Integer, List<Integer>> verticalTraversal(TreeNode root) {
+    private static Map<Integer, List<Integer>> verticalTraversal(TreeNode root) {
         Queue<_ExtendedTree> q = new LinkedList<>();
         Map<Integer, List<Integer>> verticalView = new TreeMap<>();
 
@@ -230,11 +230,10 @@ public class TreeNode {
     private static boolean isValidBST(TreeNode root) {
         return false;
     }
-    private static void leastCommonAncestor(TreeNode root) {
-
+    public static TreeNode lowestCommonAncestor(TreeNode node1, TreeNode node2) {
+        return null;
     }
     private static int verticalOrderSum(TreeNode root) {
-        int sum = 0;
-        return sum;
+        return 0;
     }
 }

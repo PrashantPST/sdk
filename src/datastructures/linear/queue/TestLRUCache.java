@@ -1,4 +1,4 @@
-package ds.linear.queue;
+package datastructures.linear.queue;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package ds.linear.stack;
+package datastructures.linear.stack;
 
 import java.util.Stack;
 

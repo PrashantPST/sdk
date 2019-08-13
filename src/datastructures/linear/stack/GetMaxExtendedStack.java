@@ -1,4 +1,4 @@
-package ds.linear.stack;
+package datastructures.linear.stack;
 
 /*
  * Design a Data Structure GetMaxExtendedStack that supports all the linear.stack operations like push(), pop(), isEmpty(), isFull()

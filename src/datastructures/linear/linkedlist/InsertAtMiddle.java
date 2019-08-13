@@ -1,4 +1,4 @@
-package ds.linear.linked_list;
+package datastructures.linear.linkedlist;
 
 class InsertAtMiddle {
     private static Node head;
