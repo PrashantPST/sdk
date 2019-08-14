@@ -17,7 +17,7 @@ class _ExtendedTree {
 }
 
 public class TreeNode {
-    public int data;
+    private int data;
     public TreeNode left;
     public TreeNode right;
 
@@ -25,14 +25,37 @@ public class TreeNode {
         this.data = data;
     }
 
+    private static int _d = 0;
+    /*
+     * height/depth Time Complexity: O(n)
+     */
     private static int height(TreeNode root) {
         if (root == null)
             return 0;
-        return (1 + Math.max(height(root.left), height(root.right)));
+
+        return Math.max(height(root.left), height(root.right)) + 1;
     }
 
-    private static int diameter(TreeNode roo) {
-        return 0;
+    /*
+     * Diameter of tree is defined as a longest path/route between any two nodes in a tree.
+     * The path may or may not pqss through the root.
+     * The length of path between two nodes is represented by the number of edges between them.
+     */
+    public static int diameter(TreeNode root) {
+        _diameter(root);
+        int temp = _d;
+        _d = 0;
+        return temp;
+    }
+
+    private static int _diameter(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        int lHeight = _diameter(root.left);
+        int rHeight = _diameter(root.right);
+        _d = Math.max(_d, (lHeight + rHeight + 1));
+        return 1 + Math.max(lHeight, rHeight);
     }
 
     private static void preOrderTraversal(TreeNode root) {
@@ -232,7 +255,7 @@ public class TreeNode {
     }
 
     // lowest/least common ancestor
-    public static TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+    private static TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
 
         if (root == null) return null;
         if (root.data == p.data || root.data == q.data) return root;
