@@ -1,6 +1,6 @@
 import datastructures.nonlinear.tree.TreeNode;
 
-import static datastructures.nonlinear.tree.TreeNode.diameter;
+import static datastructures.nonlinear.tree.TreeNode.verticalTraversal;
 
 public class Runner {
     public static void main(String[] args) {
@@ -41,13 +41,6 @@ public class Runner {
         n9.right = n13;
         n13.right = n15;
 
-        TreeNode root1 = new TreeNode(11);
-        root1.left = new TreeNode(400);
-
-        TreeNode root2 = new TreeNode(42);
-
-        System.out.println(diameter(root));
-        System.out.println(diameter(root1));
-        System.out.println(diameter(root2));
+        System.out.println(verticalTraversal(root));
     }
 }

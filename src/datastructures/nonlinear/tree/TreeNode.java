@@ -6,16 +6,6 @@ package datastructures.nonlinear.tree;
 
 import java.util.*;
 
-class _ExtendedTree {
-    TreeNode node;
-    int hd;
-
-    _ExtendedTree(TreeNode node, int hd) {
-        this.node = node;
-        this.hd = hd;
-    }
-}
-
 public class TreeNode {
     private int data;
     public TreeNode left;
@@ -127,7 +117,16 @@ public class TreeNode {
         }
     }
 
-    private static Map<Integer, List<Integer>> verticalTraversal(TreeNode root) {
+    public static Map<Integer, List<Integer>> verticalTraversal(TreeNode root) {
+        class _ExtendedTree {
+            private TreeNode node;
+            private int hd;
+
+            private _ExtendedTree(TreeNode node, int hd) {
+                this.node = node;
+                this.hd = hd;
+            }
+        }
         Queue<_ExtendedTree> q = new LinkedList<>();
         Map<Integer, List<Integer>> verticalView = new TreeMap<>();
 
@@ -153,7 +152,6 @@ public class TreeNode {
             if (tmpNode.node.right != null) {
                 q.add(new _ExtendedTree(tmpNode.node.right, tmpNode.hd + 1));
             }
-
         }
         return verticalView;
     }
@@ -197,12 +195,12 @@ public class TreeNode {
 
     public static List<Integer> bottomView(TreeNode root) {
         Map<Integer, List<Integer>> verticalView = verticalTraversal(root);
-        List<Integer> res = new ArrayList<>();
+        List<Integer> result = new ArrayList<>();
         for(Map.Entry<Integer, List<Integer>> m: verticalView.entrySet()) {
             List<Integer> temp = m.getValue();
-            res.add(temp.get(temp.size() - 1));
+            result.add(temp.get(temp.size() - 1));
         }
-        return res;
+        return result;
     }
 
     public static List<Integer> leftView(TreeNode root) {
