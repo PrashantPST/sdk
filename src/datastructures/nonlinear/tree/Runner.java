@@ -1,6 +1,7 @@
-import datastructures.nonlinear.tree.TreeNode;
+package datastructures.nonlinear.tree;
 
-import static datastructures.nonlinear.tree.TreeNode.verticalTraversal;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Runner {
     public static void main(String[] args) {
@@ -41,6 +42,12 @@ public class Runner {
         n9.right = n13;
         n13.right = n15;
 
-        System.out.println(verticalTraversal(root));
+        List<Integer> preorderTraversal = root.preorderTraversal(root, new ArrayList<>());
+        List<Integer> inorderTraversal = root.inorderTraversal(root, new ArrayList<>());
+        List<Integer> postorderTraversal = root.postorderTraversal(root, new ArrayList<>());
+
+        System.out.println(preorderTraversal);
+        System.out.println(inorderTraversal);
+        System.out.println(postorderTraversal);
     }
 }

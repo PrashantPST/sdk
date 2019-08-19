@@ -8,18 +8,19 @@ import java.util.*;
 
 public class TreeNode {
     private int data;
-    public TreeNode left;
-    public TreeNode right;
+    TreeNode left;
+    TreeNode right;
 
-    public TreeNode(int data) {
+    TreeNode(int data) {
         this.data = data;
     }
 
     private static int _d = 0;
+
     /*
      * height/depth Time Complexity: O(n)
      */
-    private static int height(TreeNode root) {
+    private int height(TreeNode root) {
         if (root == null)
             return 0;
 
@@ -27,11 +28,11 @@ public class TreeNode {
     }
 
     /*
-     * Diameter of tree is defined as a longest path/route between any two nodes in a tree.
+     * Diameter of tree is defined as a longest path/route between any two s in a tree.
      * The path may or may not pqss through the root.
-     * The length of path between two nodes is represented by the number of edges between them.
+     * The length of path between two s is represented by the number of edges between them.
      */
-    public static int diameter(TreeNode root) {
+    public int diameter(TreeNode root) {
         _diameter(root);
         int temp = _d;
         _d = 0;
@@ -48,48 +49,62 @@ public class TreeNode {
         return 1 + Math.max(lHeight, rHeight);
     }
 
-    private static void preOrderTraversal(TreeNode root) {
-        if (root == null)
-            return;
-        System.out.print(root.data + " ");
-        preOrderTraversal(root.left);
-        preOrderTraversal(root.right);
+    /*
+     * DFS of a tree can be exercised by either of (preOrder, inOrder, postOrder) traversal
+     * The inorder traversal of a BST produces the elements in sorted (non-decreasing) order.
+     */
+    List<Integer> preorderTraversal(TreeNode root, List<Integer> result) {
+        if (root != null) {
+            result.add(root.data);
+            preorderTraversal(root.left, result);
+            preorderTraversal(root.right, result);
+        }
+        return result;
     }
 
-    private static void inOrderTraversal(TreeNode root) {
-        if (root == null)
-            return;
-        inOrderTraversal(root.left);
-        System.out.print(root.data + " ");
-        inOrderTraversal(root.right);
+    List<Integer> inorderTraversal(TreeNode root, List<Integer> result) {
+        if (root != null) {
+            inorderTraversal(root.left, result);
+            result.add(root.data);
+            inorderTraversal(root.right, result);
+        }
+        return result;
     }
 
-    private static void postOrderTraversal(TreeNode root) {
-        if (root == null)
-            return;
-        postOrderTraversal(root.left);
-        postOrderTraversal(root.right);
-        System.out.print(root.data + " ");
+    List<Integer> postorderTraversal(TreeNode root, List<Integer> result) {
+        if (root != null) {
+            postorderTraversal(root.left, result);
+            postorderTraversal(root.right, result);
+            result.add(root.data);
+        }
+        return result;
     }
 
-    public static void levelOrder(TreeNode root) {
+    /*
+     * You can perform a BFS on a tree using a level order traversal.
+     */
+    List<List<Integer>> levelOrderTraversal(TreeNode root) {
         Queue<TreeNode> q = new LinkedList<>();
-        if(root == null) return;
+        List<List<Integer>> traversal = new ArrayList<>();
+
+        if (root == null) return traversal;
         int levelNodes;
         q.add(root);
         while (!q.isEmpty()) {
+            List<Integer> temp = new ArrayList<>();
             levelNodes = q.size();
             while (levelNodes-- > 0) {
-                TreeNode n = q.remove();
-                System.out.print(" " + n.data);
-                if(n.left != null) q.add(n.left);
-                if(n.right != null) q.add(n.right);
+                TreeNode current = q.remove();
+                temp.add(current.data);
+                if (current.left != null) q.add(current.left);
+                if (current.right != null) q.add(current.right);
             }
-            System.out.println();
+            traversal.add(temp);
         }
+        return traversal;
     }
 
-    public static void spiralTraversal(TreeNode root) {
+    public void spiralorder(TreeNode root) {
         if (root == null)
             return;
 
@@ -117,49 +132,49 @@ public class TreeNode {
         }
     }
 
-    public static Map<Integer, List<Integer>> verticalTraversal(TreeNode root) {
-        class _ExtendedTree {
+    private Map<Integer, List<Integer>> verticalorder(TreeNode root) {
+        class _VerticalInfo {
             private TreeNode node;
-            private int hd;
+            private int horizontalDistance;
 
-            private _ExtendedTree(TreeNode node, int hd) {
+            private _VerticalInfo(TreeNode node, int horizontalDistance) {
                 this.node = node;
-                this.hd = hd;
+                this.horizontalDistance = horizontalDistance;
             }
         }
-        Queue<_ExtendedTree> q = new LinkedList<>();
+        Queue<_VerticalInfo> q = new LinkedList<>();
         Map<Integer, List<Integer>> verticalView = new TreeMap<>();
 
         if (root == null) {
             return verticalView;
         } else {
-            q.add(new _ExtendedTree(root, 0));
+            q.add(new _VerticalInfo(root, 0));
         }
 
         while (!q.isEmpty()) {
-            _ExtendedTree tmpNode = q.poll();
-            if (!verticalView.containsKey(tmpNode.hd)) {
-                List<Integer> l = new ArrayList<>();
-                l.add(tmpNode.node.data);
-                verticalView.put(tmpNode.hd, l);
+            _VerticalInfo current = q.poll();
+            if (!verticalView.containsKey(current.horizontalDistance)) {
+                verticalView.put(current.horizontalDistance, new ArrayList<>());
             }
-            else {
-                verticalView.get(tmpNode.hd).add(tmpNode.node.data);
+            verticalView.get(current.horizontalDistance).add(current.node.data);
+            if (current.node.left != null) {
+                q.add(new _VerticalInfo(current.node.left, current.horizontalDistance - 1));
             }
-            if (tmpNode.node.left != null) {
-                q.add(new _ExtendedTree(tmpNode.node.left, tmpNode.hd - 1));
-            }
-            if (tmpNode.node.right != null) {
-                q.add(new _ExtendedTree(tmpNode.node.right, tmpNode.hd + 1));
+            if (current.node.right != null) {
+                q.add(new _VerticalInfo(current.node.right, current.horizontalDistance + 1));
             }
         }
         return verticalView;
     }
 
     private static boolean identical(TreeNode p, TreeNode q) {
+        // If both are NULL, then Identical
         if (p == null && q == null)
             return true;
-        return ((p != null && q != null) && p.data == q.data && identical(p.left, q.left) && identical(p.right, q.right));
+        // If only one tree is NULL, then not Identical
+        if (p == null || q == null)
+            return false;
+        return p.data == q.data && identical(p.left, q.left) && identical(p.right, q.right);
     }
 
     private static int _balanced(TreeNode root) {
@@ -183,20 +198,20 @@ public class TreeNode {
         return _balanced(root) > -1;
     }
 
-    public static List<Integer> topView(TreeNode root) {
-        Map<Integer, List<Integer>> verticalView = verticalTraversal(root);
+    public List<Integer> topView(TreeNode root) {
+        Map<Integer, List<Integer>> verticalView = verticalorder(root);
         List<Integer> res = new ArrayList<>();
-        for(Map.Entry<Integer, List<Integer>> m: verticalView.entrySet()) {
+        for (Map.Entry<Integer, List<Integer>> m : verticalView.entrySet()) {
             List<Integer> temp = m.getValue();
             res.add(temp.get(0));
         }
         return res;
     }
 
-    public static List<Integer> bottomView(TreeNode root) {
-        Map<Integer, List<Integer>> verticalView = verticalTraversal(root);
+    public List<Integer> bottomView(TreeNode root) {
+        Map<Integer, List<Integer>> verticalView = verticalorder(root);
         List<Integer> result = new ArrayList<>();
-        for(Map.Entry<Integer, List<Integer>> m: verticalView.entrySet()) {
+        for (Map.Entry<Integer, List<Integer>> m : verticalView.entrySet()) {
             List<Integer> temp = m.getValue();
             result.add(temp.get(temp.size() - 1));
         }
@@ -208,7 +223,7 @@ public class TreeNode {
         Queue<TreeNode> queue = new LinkedList<>();
         queue.add(root);
 
-        if(root == null) return res;
+        if (root == null) return res;
         int levelNodes;
         boolean flag;
         while (!queue.isEmpty()) {
@@ -234,7 +249,7 @@ public class TreeNode {
         q.add(root);
         while (!q.isEmpty()) {
             int queueSize = q.size();
-            while(queueSize > 0) {
+            while (queueSize > 0) {
                 TreeNode current = q.poll();
                 if (current != null) {
                     if (queueSize == 1)
@@ -265,9 +280,5 @@ public class TreeNode {
         if (rightSearchResult == null) return leftSearchResult;
 
         return root;
-    }
-
-    private static int verticalOrderSum(TreeNode root) {
-        return 0;
     }
 }
