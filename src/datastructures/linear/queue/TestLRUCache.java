@@ -3,6 +3,10 @@ package datastructures.linear.queue;
 import java.util.HashMap;
 import java.util.Map;
 
+/*
+ * When the cache is full and requires more room the system will purge the item with the lowest reference frequency.
+ */
+
 class Node {
     int key;
     int value;
@@ -17,6 +21,7 @@ class LRUCache {
     private Map<Integer, Node> map = new HashMap<>();
     private int capacity, count;
     private Node head, tail;
+
     LRUCache(int capacity) {
         this.capacity = capacity;
         head = new Node(0, 0);
@@ -27,31 +32,42 @@ class LRUCache {
         tail.next = null;
         count = 0;
     }
-    private void deleteNode(Node node) {
+    private void _deleteNode(Node node) {
         node.prev.next = node.next;
         node.next.prev = node.prev;
     }
-    private void addToHead(Node node) {
+    private void _addToHead(Node node) {
         node.next = head.next;
         node.next.prev = node;
         node.prev = head;
         head.next = node;
     }
+
+    /*
+     * Get the value (will always be positive) of the key if the key exists in the cache, otherwise return -1.
+     */
     int get(int key) {
         if (map.get(key) != null) {
             Node node = map.get(key);
-            deleteNode(node);
-            addToHead(node);
+            _deleteNode(node);
+            _addToHead(node);
             return node.value;
         }
         return -1;
     }
-    void set(int key, int value) {
+    
+    /*
+     * Set or insert the value if the key is not already present.
+     * When the cache reaches its capacity, it should invalidate the least frequently used item before inserting a new item.
+     * For the purpose of this problem, when there is a tie (i.e., two or more keys that have the same frequency),
+     * the least recently used key would be evicted.
+     */
+    void put(int key, int value) {
         if (map.get(key) != null) {
             Node node = map.get(key);
             node.value = value;
-            deleteNode(node);
-            addToHead(node);
+            _deleteNode(node);
+            _addToHead(node);
         }
         else {
             Node node = new Node(key, value);
@@ -60,23 +76,25 @@ class LRUCache {
                 count++;
             else {
                 map.remove(tail.prev.key);
-                deleteNode(tail.prev);
+                _deleteNode(tail.prev);
             }
-            addToHead(node);
+            _addToHead(node);
         }
     }
 }
 public class TestLRUCache {
     public static void main(String[] args) {
-        LRUCache cache = new LRUCache(2);
-        cache.set(1, 10);
-        cache.set(2, 20);
-        System.out.println("Value for the key: 1 is " + cache.get(1));
-        cache.set(3, 30);
-        System.out.println("Value for the key: 2 is " + cache.get(2));
-        cache.set(4, 40);
-        System.out.println("Value for the key: 1 is " + cache.get(1));
-        System.out.println("Value for the key: 3 is " + cache.get(3));
-        System.out.println("Value for the key: 4 is " + cache.get(4));
+        LRUCache cache = new LRUCache(2 /* capacity */ );
+
+        cache.put(1, 1);
+        cache.put(2, 2);
+        System.out.println(cache.get(1));       // returns 1
+        cache.put(3, 3);    // evicts key 2
+        System.out.println(cache.get(2));       // returns -1 (not found)
+        System.out.println(cache.get(3));       // returns 3.
+        cache.put(4, 4);    // evicts key 1.
+        System.out.println(cache.get(1));       // returns -1 (not found)
+        System.out.println(cache.get(3));       // returns 3
+        System.out.println(cache.get(4));       // returns 4
     }
 }

@@ -5,6 +5,7 @@ package datastructures.nonlinear.tree;
  */
 
 import java.util.*;
+import java.util.stream.IntStream;
 
 public class TreeNode {
     private int data;
@@ -16,6 +17,8 @@ public class TreeNode {
     }
 
     private static int _d = 0;
+    private static int _preOrderIndex = 0;
+    private static int _postOrderIndex = -1;
 
     /*
      * height/depth Time Complexity: O(n)
@@ -55,22 +58,22 @@ public class TreeNode {
      */
     static List<Integer> preorderTraversal(TreeNode root) {
         List<Integer> result = new ArrayList<>();
+        Stack<TreeNode> stack = new Stack<>();
+
         if (root == null) {
             return result;
         }
+        stack.push(root);
 
-        Stack<TreeNode> s = new Stack<>();
-        s.push(root);
-
-        while (!s.empty()) {
-            TreeNode node = s.pop();
+        while (!stack.empty()) {
+            TreeNode node = stack.pop();
             result.add(node.data);
 
             if (node.right != null) {
-                s.push(node.right);
+                stack.push(node.right);
             }
             if (node.left != null) {
-                s.push(node.left);
+                stack.push(node.left);
             }
         }
         return result;
@@ -78,22 +81,24 @@ public class TreeNode {
 
     static List<Integer> inorderTraversal(TreeNode root) {
         List<Integer> result = new ArrayList<>();
-        Stack<TreeNode> s = new Stack<>();
+        Stack<TreeNode> stack = new Stack<>();
 
-        boolean done = false;
+        if (root == null) {
+            return result;
+        }
+        while(root != null) {
+            stack.push(root);
+            root = root.left;
+        }
 
-        while (!done) {
-            if (root != null) {
-                s.push(root);
-                root = root.left;
-            }
-            else {
-                if (!s.empty()) {
-                    root = s.pop();
-                    result.add(root.data);
-                    root = root.right;
-                }
-                else done = true;
+        while(!stack.isEmpty()) {
+            TreeNode t = stack.pop();
+            result.add(t.data);
+
+            t = t.right;
+            while(t != null) {
+                stack.push(t);
+                t = t.left;
             }
         }
         return result;
@@ -229,20 +234,14 @@ public class TreeNode {
     public List<Integer> topView(TreeNode root) {
         Map<Integer, List<Integer>> verticalView = verticalorder(root);
         List<Integer> res = new ArrayList<>();
-        for (Map.Entry<Integer, List<Integer>> m : verticalView.entrySet()) {
-            List<Integer> temp = m.getValue();
-            res.add(temp.get(0));
-        }
+        verticalView.forEach((key, value) -> res.add(value.get(0)));
         return res;
     }
 
     public List<Integer> bottomView(TreeNode root) {
         Map<Integer, List<Integer>> verticalView = verticalorder(root);
         List<Integer> result = new ArrayList<>();
-        for (Map.Entry<Integer, List<Integer>> m : verticalView.entrySet()) {
-            List<Integer> temp = m.getValue();
-            result.add(temp.get(temp.size() - 1));
-        }
+        verticalView.forEach((key, value) -> result.add(value.get(value.size() - 1)));
         return result;
     }
 
@@ -335,5 +334,64 @@ public class TreeNode {
             }
         }
         return root;
+    }
+
+    /*
+     * Given preorder and inorder traversal of a tree, construct the binary tree.
+     * @param preorder preorder traversal of tree
+     * @param inorder inorder traversal of tree
+     * @return root of the constructed tree
+     */
+    static TreeNode buildTreeFromPreorderAndInorder(int[] preorder, int[] inorder) {
+        TreeNode root = _makeBTreev1(preorder, inorder, 0, preorder.length - 1);
+        _preOrderIndex = 0;
+        return root;
+    }
+
+    private static TreeNode _makeBTreev1(int[] preorder, int[] inorder, int start, int end) {
+        if(start > end) {
+            return null;
+        }
+        TreeNode root = new TreeNode(preorder[_preOrderIndex++]);
+
+        if(start == end) {
+            return root;
+        }
+
+        int index = _getInorderIndex(inorder, start, end, root.data);
+        root.left = _makeBTreev1(preorder, inorder, start, index-1);
+        root.right = _makeBTreev1(preorder, inorder, index+1, end);
+        return root;
+    }
+
+    /*
+     * Given inorder and postorder traversal of a tree, construct the binary tree.
+     */
+    static TreeNode buildTreeFromInorderAndPostorder(int[] inorder, int[] postorder) {
+        _postOrderIndex = postorder.length - 1;
+        return _makeBTreev2(inorder, postorder, 0, postorder.length - 1);
+    }
+
+    private static TreeNode _makeBTreev2(int[] inorder, int[] postorder, int start, int end) {
+        if(start > end) {
+            return null;
+        }
+        TreeNode root = new TreeNode(postorder[_postOrderIndex--]);
+
+        if(start == end) {
+            return root;
+        }
+
+        int index = _getInorderIndex(inorder, start, end, root.data);
+        root.right = _makeBTreev2(inorder, postorder, index + 1, end);
+        root.left = _makeBTreev2(inorder, postorder, start, index - 1);
+        return root;
+    }
+
+    private static int _getInorderIndex(int[] inOrder, int start, int end, int target) {
+        return IntStream.range(start, end + 1).
+                filter(i -> target == inOrder[i]).
+                findFirst().
+                orElse(-1);
     }
 }

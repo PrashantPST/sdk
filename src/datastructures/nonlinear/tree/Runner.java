@@ -50,5 +50,13 @@ public class Runner {
         TreeNode root1 = TreeNode.createTreeFromParentArray(parent);
         System.out.println("Inorder traversal for constructed tree is: ");
         System.out.println(TreeNode.inorderTraversal(root1));
+
+        int[] inorder = new int[] { 9, 8, 4, 2, 10, 5, 10, 1, 6, 3, 13, 12, 7 };
+        int[] postorder = new int[] { 9, 8, 4, 10, 10, 5, 2, 6, 13, 12, 7, 3, 1 };
+        TreeNode root2 = TreeNode.buildTreeFromInorderAndPostorder(inorder, postorder);
+        System.out.println("preorder traversal = "+TreeNode.preorderTraversal(root2));
+        System.out.println("inorder traversal = "+TreeNode.inorderTraversal(root2));
+        System.out.println("postorder traversal = "+TreeNode.postorderTraversal(root2, new ArrayList<>()));
+
     }
 }

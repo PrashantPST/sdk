@@ -15,7 +15,7 @@ public class BST {
 
     }
 
-    private boolean isBST(BST root) {
+    private boolean isValidBST(BST root) {
 
     }
 
