@@ -50,28 +50,56 @@ public class TreeNode {
     }
 
     /*
-     * DFS of a tree can be exercised by either of (preOrder, inOrder, postOrder) traversal
+     * DFS of a tree can be attained by either of (preorder, inorder, postorder) traversal
      * The inorder traversal of a BST produces the elements in sorted (non-decreasing) order.
      */
-    List<Integer> preorderTraversal(TreeNode root, List<Integer> result) {
-        if (root != null) {
-            result.add(root.data);
-            preorderTraversal(root.left, result);
-            preorderTraversal(root.right, result);
+    static List<Integer> preorderTraversal(TreeNode root) {
+        List<Integer> result = new ArrayList<>();
+        if (root == null) {
+            return result;
+        }
+
+        Stack<TreeNode> s = new Stack<>();
+        s.push(root);
+
+        while (!s.empty()) {
+            TreeNode node = s.pop();
+            result.add(node.data);
+
+            if (node.right != null) {
+                s.push(node.right);
+            }
+            if (node.left != null) {
+                s.push(node.left);
+            }
         }
         return result;
     }
 
-    List<Integer> inorderTraversal(TreeNode root, List<Integer> result) {
-        if (root != null) {
-            inorderTraversal(root.left, result);
-            result.add(root.data);
-            inorderTraversal(root.right, result);
+    static List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> result = new ArrayList<>();
+        Stack<TreeNode> s = new Stack<>();
+
+        boolean done = false;
+
+        while (!done) {
+            if (root != null) {
+                s.push(root);
+                root = root.left;
+            }
+            else {
+                if (!s.empty()) {
+                    root = s.pop();
+                    result.add(root.data);
+                    root = root.right;
+                }
+                else done = true;
+            }
         }
         return result;
     }
 
-    List<Integer> postorderTraversal(TreeNode root, List<Integer> result) {
+    static List<Integer>  postorderTraversal(TreeNode root, List<Integer> result) {
         if (root != null) {
             postorderTraversal(root.left, result);
             postorderTraversal(root.right, result);
@@ -279,6 +307,33 @@ public class TreeNode {
         if (leftSearchResult == null) return rightSearchResult;
         if (rightSearchResult == null) return leftSearchResult;
 
+        return root;
+    }
+
+    /*
+     * O(n) solution to construct binary tree from its parent array representation.
+     */
+    static TreeNode createTreeFromParentArray(int[] parent) {
+        Map<Integer, TreeNode> map = new HashMap<>();
+        for (int i = 0; i < parent.length; i++) {
+            map.put(i, new TreeNode(i));
+        }
+        TreeNode root = null;
+
+        for (int i = 0; i < parent.length; i++) {
+            if (parent[i] == -1) {
+                root = map.get(i);
+            }
+            else {
+                TreeNode ptr = map.get(parent[i]);
+                if (ptr.left != null) {
+                    ptr.right = map.get(i);
+                }
+                else {
+                    ptr.left = map.get(i);
+                }
+            }
+        }
         return root;
     }
 }

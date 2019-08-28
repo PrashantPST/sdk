@@ -3,7 +3,7 @@ package string;
 import java.util.HashMap;
 import java.util.Map;
 
-class StringADT {
+class StringUtil {
 
     static boolean areAnagram(String str1, String str2) {
         if (str1.length() != str2.length())

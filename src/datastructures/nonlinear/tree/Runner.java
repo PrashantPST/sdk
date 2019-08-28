@@ -1,7 +1,7 @@
 package datastructures.nonlinear.tree;
 
 import java.util.ArrayList;
-import java.util.List;
+
 
 public class Runner {
     public static void main(String[] args) {
@@ -42,12 +42,13 @@ public class Runner {
         n9.right = n13;
         n13.right = n15;
 
-        List<Integer> preorderTraversal = root.preorderTraversal(root, new ArrayList<>());
-        List<Integer> inorderTraversal = root.inorderTraversal(root, new ArrayList<>());
-        List<Integer> postorderTraversal = root.postorderTraversal(root, new ArrayList<>());
+        System.out.println(TreeNode.preorderTraversal(root));
+        System.out.println(TreeNode.inorderTraversal(root));
+        System.out.println(TreeNode.postorderTraversal(root, new ArrayList<>()));
 
-        System.out.println(preorderTraversal);
-        System.out.println(inorderTraversal);
-        System.out.println(postorderTraversal);
+        int[] parent = { 3, 5, 0, -1, 5, 3, 0 };
+        TreeNode root1 = TreeNode.createTreeFromParentArray(parent);
+        System.out.println("Inorder traversal for constructed tree is: ");
+        System.out.println(TreeNode.inorderTraversal(root1));
     }
 }
