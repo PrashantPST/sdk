@@ -1,9 +1,5 @@
 package datastructures.nonlinear.tree;
 
-/*
- * @author Prashant Kumar
- */
-
 import java.util.*;
 import java.util.stream.IntStream;
 
@@ -12,16 +8,19 @@ public class TreeNode {
     TreeNode left;
     TreeNode right;
 
-    TreeNode(int data) {
-        this.data = data;
+    TreeNode(int val) {
+        data = val;
+        left = null;
+        right = null;
     }
 
     private static int _d = 0;
     private static int _preOrderIndex = 0;
     private static int _postOrderIndex = -1;
+    private static int _maxSum;
 
-    /*
-     * height/depth Time Complexity: O(n)
+    /**
+     * @return height/depth Time Complexity: O(n)
      */
     private int height(TreeNode root) {
         if (root == null)
@@ -210,6 +209,10 @@ public class TreeNode {
         return p.data == q.data && identical(p.left, q.left) && identical(p.right, q.right);
     }
 
+    public static boolean isBalanced(TreeNode root) {
+        return _balanced(root) > -1;
+    }
+
     private static int _balanced(TreeNode root) {
         if (root == null) {
             return 0;
@@ -225,10 +228,6 @@ public class TreeNode {
         if (Math.abs(lHeight - rHeight) > 1)
             return -1;
         return Math.max(lHeight, rHeight) + 1;
-    }
-
-    public static boolean isBalanced(TreeNode root) {
-        return _balanced(root) > -1;
     }
 
     public List<Integer> topView(TreeNode root) {
@@ -393,5 +392,27 @@ public class TreeNode {
                 filter(i -> target == inOrder[i]).
                 findFirst().
                 orElse(-1);
+    }
+
+    /**
+     * Given a non-empty binary tree, find the maximum path sum.
+     * @param root The first and the only argument contains a pointer to the root.
+     * @return maximum path sum
+     */
+    private int maxPathSum(TreeNode root) {
+        _maxSum = Integer.MIN_VALUE;
+        _findMaxUtil(root);
+        return _maxSum;
+    }
+
+    private int _findMaxUtil(TreeNode node) {
+        if (node == null)
+            return 0;
+
+        int l = _findMaxUtil(node.left);
+        int r = _findMaxUtil(node.right);
+        int curr = Math.max(Math.max(l, r) + node.data, node.data);
+        _maxSum = Math.max(Math.max(_maxSum, curr), l + r + node.data);
+        return curr;
     }
 }
