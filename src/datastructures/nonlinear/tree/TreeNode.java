@@ -18,6 +18,7 @@ public class TreeNode {
     private static int _preOrderIndex = 0;
     private static int _postOrderIndex = -1;
     private static int _maxSum;
+    private static int _maxAncestorDiff;
 
     /**
      * @return height/depth Time Complexity: O(n)
@@ -414,5 +415,28 @@ public class TreeNode {
         int curr = Math.max(Math.max(l, r) + node.data, node.data);
         _maxSum = Math.max(Math.max(_maxSum, curr), l + r + node.data);
         return curr;
+    }
+
+    /**
+     * @param root pointer to the root of a Binary tree
+     * @return maximum difference between node and its ancestor
+     */
+    private static int maxAncestorDiff(TreeNode root) {
+        _maxAncestorDiff= Integer.MIN_VALUE;
+        _maxDiffUtil(root);
+        return _maxAncestorDiff;
+    }
+    private static int _maxDiffUtil(TreeNode root) {
+        if (root == null) {
+            return Integer.MAX_VALUE;
+        }
+        if (root.left == null && root.right == null) {
+            return root.data;
+        }
+        int l = _maxDiffUtil(root.left);
+        int r = _maxDiffUtil(root.right);
+        int val = root.data - Math.min(l, r);
+        _maxAncestorDiff = Math.max(_maxAncestorDiff, val);
+        return Math.min(Math.min(root.data, l), r);
     }
 }
