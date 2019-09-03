@@ -52,7 +52,7 @@ public class TreeNode {
         return 1 + Math.max(lHeight, rHeight);
     }
 
-    /*
+    /**
      * DFS of a tree can be attained by either of (preorder, inorder, postorder) traversal
      * The inorder traversal of a BST produces the elements in sorted (non-decreasing) order.
      */
