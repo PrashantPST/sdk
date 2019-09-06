@@ -1,6 +1,9 @@
 package datastructures.nonlinear.tree;
 
 
+import java.util.SortedSet;
+import java.util.TreeSet;
+
 public class BST {
     private int data;
     private BST left;
@@ -35,26 +38,19 @@ public class BST {
     }
 
     private BST insertNode(BST root, int key) {
-        BST curr = root;
-        BST parent = null;
-
+        // if the root is null, create a new node an return it
         if (root == null) {
             return new BST(key);
         }
 
-        while (curr != null) {
-            parent = curr;
-
-            if (key < curr.data) {
-                curr = curr.left;
-            } else {
-                curr = curr.right;
-            }
+        // if given key is less than the root node, recur for left subtree
+        if (key < root.data) {
+            root.left = insertNode(root.left, key);
         }
-        if (key < parent.data) {
-            parent.left = new BST(key);
-        } else {
-            parent.right = new BST(key);
+
+        // if given key is more than the root node, recur for right subtree
+        else {
+            root.right = insertNode(root.right, key);
         }
         return root;
     }
@@ -95,7 +91,22 @@ public class BST {
         }
     }
 
-    private boolean isValidBST(BST root) {
+    /**
+     * @param nums integer array
+     * @return a count array where count[i] is the number of smaller elements to the right of nums[i]
+     */
+    static int[] countSmaller(int[] nums) {
+        int n = nums.length;
+        int[] count = new int[nums.length];
+        SortedSet<Integer> set = new TreeSet<>();
+        for (int index = n - 1; index >= 0; index--) {
+            set.add(nums[index]);
+            count[index] = set.headSet(nums[index]).size();
+        }
+        return count;
+    }
 
+    private boolean isValidBST(BST root) {
+        return false;
     }
 }
