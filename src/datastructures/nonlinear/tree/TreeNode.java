@@ -296,7 +296,7 @@ public class TreeNode {
 
     private static TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
 
-        if (root == null) return null;
+        if (root == null) return root;
         if (root.data == p.data || root.data == q.data) return root;
 
         TreeNode leftSearchResult = lowestCommonAncestor(root.left, p, q);

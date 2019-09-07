@@ -17,11 +17,13 @@ public class BST {
 
     public static BST lowestCommonAncestor(BST root, BST p, BST q) {
         while (root != null) {
-            if (p.data < root.data && q.data < root.data)
+            if (p.data < root.data && q.data < root.data) {
                 root = root.left;
-            else if (root.data < p.data && root.data < q.data)
+            } else if (root.data < p.data && root.data < q.data) {
                 root = root.right;
-            else break;
+            } else {
+                break;
+            }
         }
         return root;
     }
@@ -35,6 +37,21 @@ public class BST {
             min = min.left;
         }
         return min;
+    }
+
+    /**
+     * @param nums integer array
+     * @return a count array where count[i] is the number of smaller elements to the right of nums[i]
+     */
+    static int[] countSmaller(int[] nums) {
+        int n = nums.length;
+        int[] count = new int[nums.length];
+        SortedSet<Integer> set = new TreeSet<>();
+        for (int index = n - 1; index >= 0; index--) {
+            set.add(nums[index]);
+            count[index] = set.headSet(nums[index]).size();
+        }
+        return count;
     }
 
     private BST insertNode(BST root, int key) {
@@ -72,7 +89,7 @@ public class BST {
         else if (root.right == null)
             return root.left;
 
-        // current node have both left and right subtree.
+            // current node have both left and right subtree.
         else {
             BST successorParent = root;
             BST successor = root.right;
@@ -91,22 +108,56 @@ public class BST {
         }
     }
 
-    /**
-     * @param nums integer array
-     * @return a count array where count[i] is the number of smaller elements to the right of nums[i]
-     */
-    static int[] countSmaller(int[] nums) {
-        int n = nums.length;
-        int[] count = new int[nums.length];
-        SortedSet<Integer> set = new TreeSet<>();
-        for (int index = n - 1; index >= 0; index--) {
-            set.add(nums[index]);
-            count[index] = set.headSet(nums[index]).size();
-        }
-        return count;
-    }
-
     private boolean isValidBST(BST root) {
         return false;
+    }
+
+    /**
+     * algorithm run in O(logn) time with extra space of order O(1)
+     *
+     * @param root
+     * @param key
+     * @return
+     */
+    private BST floor(BST root, int key) {
+        if (root == null) {
+            return root;
+        }
+        BST floor;
+        if (root.data == key) {
+            floor = root;
+        } else if (root.data < key) {
+            floor = floor(root.right, key);
+            if (floor == null) {
+                floor = root;
+            }
+        } else {
+            floor = floor(root.left, key);
+        }
+        return floor;
+    }
+
+    /**
+     * @param root
+     * @param key
+     * @return
+     */
+    private BST ceil(BST root, int key) {
+        if (root == null)
+            return root;
+        if (root.data == key) {
+            return root;
+        }
+        BST ceil;
+        if (key < root.data) {
+            ceil = ceil(root.left, key);
+            if (ceil == null) {
+                ceil = root;
+            }
+        }
+        else {
+            ceil = ceil(root.right, key);
+        }
+        return ceil;
     }
 }
