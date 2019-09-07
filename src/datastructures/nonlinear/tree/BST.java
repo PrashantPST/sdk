@@ -1,6 +1,7 @@
 package datastructures.nonlinear.tree;
 
 
+import java.time.LocalDate;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -109,7 +110,17 @@ public class BST {
     }
 
     private boolean isBST(BST root) {
+        return _bstChecker(root, Long.MIN_VALUE, Long.MAX_VALUE);
+    }
 
+    private static boolean _bstChecker(BST root, long min, long max) {
+        if (root == null) {
+            return true;
+        }
+        if ((long) root.data < min || (long) root.data > max) {
+            return false;
+        }
+        return _bstChecker(root.left, min, (long) root.data - 1) && _bstChecker(root.right, (long) root.data + 1, max);
     }
 
     private BST floor(BST root, int key) {
