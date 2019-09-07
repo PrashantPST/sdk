@@ -76,7 +76,7 @@ public class BST {
         if (root == null)
             return null;
 
-        if (root.data > key) {
+        if (key < root.data) {
             root.left = deleteNode(root.left, key);
             return root;
         } else if (root.data < key) {
@@ -108,17 +108,10 @@ public class BST {
         }
     }
 
-    private boolean isValidBST(BST root) {
-        return false;
+    private boolean isBST(BST root) {
+
     }
 
-    /**
-     * algorithm run in O(logn) time with extra space of order O(1)
-     *
-     * @param root
-     * @param key
-     * @return
-     */
     private BST floor(BST root, int key) {
         if (root == null) {
             return root;
@@ -137,11 +130,6 @@ public class BST {
         return floor;
     }
 
-    /**
-     * @param root
-     * @param key
-     * @return
-     */
     private BST ceil(BST root, int key) {
         if (root == null)
             return root;
