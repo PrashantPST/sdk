@@ -1,4 +1,4 @@
-package datastructures.linear.linkedlist;
+package ds.linear.linkedlist;
 
 class Node {
         private int data;

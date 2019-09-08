@@ -1,4 +1,4 @@
-package datastructures.linear.arrays;
+package ds.linear.arrays;
 
 public class Array {
 

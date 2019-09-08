@@ -1,4 +1,4 @@
-package datastructures.nonlinear.tree;
+package ds.nonlinear.tree;
 
 
 import java.util.SortedSet;
