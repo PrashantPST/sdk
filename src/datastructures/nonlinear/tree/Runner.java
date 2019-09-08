@@ -4,24 +4,24 @@ import java.util.Arrays;
 
 public class Runner {
     public static void main(String[] args) {
-        TreeNode root   = new TreeNode(1);
+        BinaryTree root   = new BinaryTree(1);
 
-        TreeNode n2   = new TreeNode(2);
-        TreeNode n3   = new TreeNode(3);
-        TreeNode n4   = new TreeNode(4);
-        TreeNode n5   = new TreeNode(5);
-        TreeNode n6   = new TreeNode(6);
-        TreeNode n7   = new TreeNode(7);
-        TreeNode n8   = new TreeNode(8);
-        TreeNode n9   = new TreeNode(9);
-        TreeNode n10   = new TreeNode(10);
-        TreeNode n11   = new TreeNode(11);
-        TreeNode n12   = new TreeNode(12);
-        TreeNode n13   = new TreeNode(13);
-        TreeNode n14   = new TreeNode(14);
-        TreeNode n15   = new TreeNode(15);
-        TreeNode n16   = new TreeNode(16);
-        TreeNode n17   = new TreeNode(17);
+        BinaryTree n2   = new BinaryTree(2);
+        BinaryTree n3   = new BinaryTree(3);
+        BinaryTree n4   = new BinaryTree(4);
+        BinaryTree n5   = new BinaryTree(5);
+        BinaryTree n6   = new BinaryTree(6);
+        BinaryTree n7   = new BinaryTree(7);
+        BinaryTree n8   = new BinaryTree(8);
+        BinaryTree n9   = new BinaryTree(9);
+        BinaryTree n10   = new BinaryTree(10);
+        BinaryTree n11   = new BinaryTree(11);
+        BinaryTree n12   = new BinaryTree(12);
+        BinaryTree n13   = new BinaryTree(13);
+        BinaryTree n14   = new BinaryTree(14);
+        BinaryTree n15   = new BinaryTree(15);
+        BinaryTree n16   = new BinaryTree(16);
+        BinaryTree n17   = new BinaryTree(17);
 
 
         root.left  = n2;
@@ -42,6 +42,6 @@ public class Runner {
         n13.right = n15;
 
         int[] nums = { 8, 2, 4, 3, 8, 7, 6, 5 };
-        System.out.println(Arrays.toString(BST.countSmaller(nums)));
+        System.out.println(Arrays.toString(BinarySearchTree.countSmaller(nums)));
     }
 }

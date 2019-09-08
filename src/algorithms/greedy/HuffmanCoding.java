@@ -1,4 +1,4 @@
 package algorithms.greedy;
 
-public class Kruskal {
+public class HuffmanCoding {
 }

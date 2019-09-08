@@ -3,12 +3,12 @@ package datastructures.nonlinear.tree;
 import java.util.*;
 import java.util.stream.IntStream;
 
-public class TreeNode {
+public class BinaryTree {
     private int data;
-    TreeNode left;
-    TreeNode right;
+    BinaryTree left;
+    BinaryTree right;
 
-    TreeNode(int val) {
+    BinaryTree(int val) {
         data = val;
         left = null;
         right = null;
@@ -23,7 +23,7 @@ public class TreeNode {
     /**
      * @return height/depth Time Complexity: O(n)
      */
-    private int height(TreeNode root) {
+    private int height(BinaryTree root) {
         if (root == null)
             return 0;
 
@@ -35,14 +35,14 @@ public class TreeNode {
      * The path may or may not pqss through the root.
      * The length of path between two s is represented by the number of edges between them.
      */
-    public int diameter(TreeNode root) {
+    public int diameter(BinaryTree root) {
         _diameter(root);
         int temp = _d;
         _d = 0;
         return temp;
     }
 
-    private static int _diameter(TreeNode root) {
+    private static int _diameter(BinaryTree root) {
         if (root == null) {
             return 0;
         }
@@ -56,9 +56,9 @@ public class TreeNode {
      * DFS of a tree can be attained by either of (preorder, inorder, postorder) traversal
      * The inorder traversal of a BST produces the elements in sorted (non-decreasing) order.
      */
-    static List<Integer> preorderTraversal(TreeNode root) {
+    static List<Integer> preorderTraversal(BinaryTree root) {
         List<Integer> result = new ArrayList<>();
-        Stack<TreeNode> stack = new Stack<>();
+        Stack<BinaryTree> stack = new Stack<>();
 
         if (root == null) {
             return result;
@@ -66,7 +66,7 @@ public class TreeNode {
         stack.push(root);
 
         while (!stack.empty()) {
-            TreeNode node = stack.pop();
+            BinaryTree node = stack.pop();
             result.add(node.data);
 
             if (node.right != null) {
@@ -79,9 +79,9 @@ public class TreeNode {
         return result;
     }
 
-    static List<Integer> inorderTraversal(TreeNode root) {
+    static List<Integer> inorderTraversal(BinaryTree root) {
         List<Integer> result = new ArrayList<>();
-        Stack<TreeNode> stack = new Stack<>();
+        Stack<BinaryTree> stack = new Stack<>();
 
         if (root == null) {
             return result;
@@ -92,7 +92,7 @@ public class TreeNode {
         }
 
         while(!stack.isEmpty()) {
-            TreeNode t = stack.pop();
+            BinaryTree t = stack.pop();
             result.add(t.data);
 
             t = t.right;
@@ -104,7 +104,7 @@ public class TreeNode {
         return result;
     }
 
-    static List<Integer>  postorderTraversal(TreeNode root, List<Integer> result) {
+    static List<Integer>  postorderTraversal(BinaryTree root, List<Integer> result) {
         if (root != null) {
             postorderTraversal(root.left, result);
             postorderTraversal(root.right, result);
@@ -116,8 +116,8 @@ public class TreeNode {
     /*
      * You can perform a BFS on a tree using a level order traversal.
      */
-    List<List<Integer>> levelOrderTraversal(TreeNode root) {
-        Queue<TreeNode> q = new LinkedList<>();
+    List<List<Integer>> levelOrderTraversal(BinaryTree root) {
+        Queue<BinaryTree> q = new LinkedList<>();
         List<List<Integer>> traversal = new ArrayList<>();
 
         if (root == null) return traversal;
@@ -127,7 +127,7 @@ public class TreeNode {
             List<Integer> temp = new ArrayList<>();
             levelNodes = q.size();
             while (levelNodes-- > 0) {
-                TreeNode current = q.remove();
+                BinaryTree current = q.remove();
                 temp.add(current.data);
                 if (current.left != null) q.add(current.left);
                 if (current.right != null) q.add(current.right);
@@ -137,16 +137,16 @@ public class TreeNode {
         return traversal;
     }
 
-    public void spiralorder(TreeNode root) {
+    public void spiralorder(BinaryTree root) {
         if (root == null)
             return;
 
-        Stack<TreeNode> s1 = new Stack<>();
-        Stack<TreeNode> s2 = new Stack<>();
+        Stack<BinaryTree> s1 = new Stack<>();
+        Stack<BinaryTree> s2 = new Stack<>();
         s1.push(root);
         while (!s1.empty() || !s2.empty()) {
             while (!s1.empty()) {
-                TreeNode temp = s1.pop();
+                BinaryTree temp = s1.pop();
                 System.out.print(temp.data + " ");
 
                 if (temp.right != null)
@@ -155,7 +155,7 @@ public class TreeNode {
                     s2.push(temp.left);
             }
             while (!s2.empty()) {
-                TreeNode temp = s2.pop();
+                BinaryTree temp = s2.pop();
                 System.out.print(temp.data + " ");
                 if (temp.left != null)
                     s1.push(temp.left);
@@ -165,12 +165,12 @@ public class TreeNode {
         }
     }
 
-    private Map<Integer, List<Integer>> verticalorder(TreeNode root) {
+    private Map<Integer, List<Integer>> verticalorder(BinaryTree root) {
         class _VerticalInfo {
-            private TreeNode node;
+            private BinaryTree node;
             private int horizontalDistance;
 
-            private _VerticalInfo(TreeNode node, int horizontalDistance) {
+            private _VerticalInfo(BinaryTree node, int horizontalDistance) {
                 this.node = node;
                 this.horizontalDistance = horizontalDistance;
             }
@@ -200,7 +200,7 @@ public class TreeNode {
         return verticalView;
     }
 
-    private static boolean identical(TreeNode p, TreeNode q) {
+    private static boolean identical(BinaryTree p, BinaryTree q) {
         // If both are NULL, then Identical
         if (p == null && q == null)
             return true;
@@ -210,11 +210,11 @@ public class TreeNode {
         return p.data == q.data && identical(p.left, q.left) && identical(p.right, q.right);
     }
 
-    public static boolean isBalanced(TreeNode root) {
+    public static boolean isBalanced(BinaryTree root) {
         return _balanced(root) > -1;
     }
 
-    private static int _balanced(TreeNode root) {
+    private static int _balanced(BinaryTree root) {
         if (root == null) {
             return 0;
         }
@@ -231,23 +231,23 @@ public class TreeNode {
         return Math.max(lHeight, rHeight) + 1;
     }
 
-    public List<Integer> topView(TreeNode root) {
+    public List<Integer> topView(BinaryTree root) {
         Map<Integer, List<Integer>> verticalView = verticalorder(root);
         List<Integer> res = new ArrayList<>();
         verticalView.forEach((key, value) -> res.add(value.get(0)));
         return res;
     }
 
-    public List<Integer> bottomView(TreeNode root) {
+    public List<Integer> bottomView(BinaryTree root) {
         Map<Integer, List<Integer>> verticalView = verticalorder(root);
         List<Integer> result = new ArrayList<>();
         verticalView.forEach((key, value) -> result.add(value.get(value.size() - 1)));
         return result;
     }
 
-    public static List<Integer> leftView(TreeNode root) {
+    public static List<Integer> leftView(BinaryTree root) {
         List<Integer> res = new ArrayList<>();
-        Queue<TreeNode> queue = new LinkedList<>();
+        Queue<BinaryTree> queue = new LinkedList<>();
         queue.add(root);
 
         if (root == null) return res;
@@ -257,7 +257,7 @@ public class TreeNode {
             flag = true;
             levelNodes = queue.size();
             while (levelNodes-- > 0) {
-                TreeNode curr = queue.poll();
+                BinaryTree curr = queue.poll();
                 if (flag)
                     res.add(curr.data);
                 flag = false;
@@ -270,14 +270,14 @@ public class TreeNode {
         return res;
     }
 
-    public static List<Integer> rightView(TreeNode root) {
-        Queue<TreeNode> q = new LinkedList<>();
+    public static List<Integer> rightView(BinaryTree root) {
+        Queue<BinaryTree> q = new LinkedList<>();
         List<Integer> res = new ArrayList<>();
         q.add(root);
         while (!q.isEmpty()) {
             int queueSize = q.size();
             while (queueSize > 0) {
-                TreeNode current = q.poll();
+                BinaryTree current = q.poll();
                 if (current != null) {
                     if (queueSize == 1)
                         res.add(current.data);
@@ -294,13 +294,13 @@ public class TreeNode {
         return res;
     }
 
-    private static TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+    private static BinaryTree lowestCommonAncestor(BinaryTree root, BinaryTree p, BinaryTree q) {
 
         if (root == null) return root;
         if (root.data == p.data || root.data == q.data) return root;
 
-        TreeNode leftSearchResult = lowestCommonAncestor(root.left, p, q);
-        TreeNode rightSearchResult = lowestCommonAncestor(root.right, p, q);
+        BinaryTree leftSearchResult = lowestCommonAncestor(root.left, p, q);
+        BinaryTree rightSearchResult = lowestCommonAncestor(root.right, p, q);
 
         if (leftSearchResult == null) return rightSearchResult;
         if (rightSearchResult == null) return leftSearchResult;
@@ -310,19 +310,19 @@ public class TreeNode {
     /*
      * O(n) solution to construct binary tree from its parent array representation.
      */
-    static TreeNode createTreeFromParentArray(int[] parent) {
-        Map<Integer, TreeNode> map = new HashMap<>();
+    static BinaryTree createTreeFromParentArray(int[] parent) {
+        Map<Integer, BinaryTree> map = new HashMap<>();
         for (int i = 0; i < parent.length; i++) {
-            map.put(i, new TreeNode(i));
+            map.put(i, new BinaryTree(i));
         }
-        TreeNode root = null;
+        BinaryTree root = null;
 
         for (int i = 0; i < parent.length; i++) {
             if (parent[i] == -1) {
                 root = map.get(i);
             }
             else {
-                TreeNode ptr = map.get(parent[i]);
+                BinaryTree ptr = map.get(parent[i]);
                 if (ptr.left != null) {
                     ptr.right = map.get(i);
                 }
@@ -340,17 +340,17 @@ public class TreeNode {
      * @param inorder inorder traversal of tree
      * @return root of the constructed tree
      */
-    static TreeNode buildTreeFromPreorderAndInorder(int[] preorder, int[] inorder) {
-        TreeNode root = _makeBTreev1(preorder, inorder, 0, preorder.length - 1);
+    static BinaryTree buildTreeFromPreorderAndInorder(int[] preorder, int[] inorder) {
+        BinaryTree root = _makeBTreev1(preorder, inorder, 0, preorder.length - 1);
         _preOrderIndex = 0;
         return root;
     }
 
-    private static TreeNode _makeBTreev1(int[] preorder, int[] inorder, int start, int end) {
+    private static BinaryTree _makeBTreev1(int[] preorder, int[] inorder, int start, int end) {
         if(start > end) {
             return null;
         }
-        TreeNode root = new TreeNode(preorder[_preOrderIndex++]);
+        BinaryTree root = new BinaryTree(preorder[_preOrderIndex++]);
 
         if(start == end) {
             return root;
@@ -365,16 +365,16 @@ public class TreeNode {
     /*
      * Given inorder and postorder traversal of a tree, construct the binary tree.
      */
-    static TreeNode buildTreeFromInorderAndPostorder(int[] inorder, int[] postorder) {
+    static BinaryTree buildTreeFromInorderAndPostorder(int[] inorder, int[] postorder) {
         _postOrderIndex = postorder.length - 1;
         return _makeBTreev2(inorder, postorder, 0, postorder.length - 1);
     }
 
-    private static TreeNode _makeBTreev2(int[] inorder, int[] postorder, int start, int end) {
+    private static BinaryTree _makeBTreev2(int[] inorder, int[] postorder, int start, int end) {
         if(start > end) {
             return null;
         }
-        TreeNode root = new TreeNode(postorder[_postOrderIndex--]);
+        BinaryTree root = new BinaryTree(postorder[_postOrderIndex--]);
 
         if(start == end) {
             return root;
@@ -398,13 +398,13 @@ public class TreeNode {
      * @param root The first and the only argument contains a pointer to the root.
      * @return maximum path sum
      */
-    private int maxPathSum(TreeNode root) {
+    private int maxPathSum(BinaryTree root) {
         _maxSum = Integer.MIN_VALUE;
         _findMaxUtil(root);
         return _maxSum;
     }
 
-    private int _findMaxUtil(TreeNode node) {
+    private int _findMaxUtil(BinaryTree node) {
         if (node == null)
             return 0;
 
@@ -419,12 +419,12 @@ public class TreeNode {
      * @param root pointer to the root of a Binary tree
      * @return maximum difference between node and its ancestor
      */
-    private static int maxAncestorDiff(TreeNode root) {
+    private static int maxAncestorDiff(BinaryTree root) {
         _maxAncestorDiff= Integer.MIN_VALUE;
         _maxDiffUtil(root);
         return _maxAncestorDiff;
     }
-    private static int _maxDiffUtil(TreeNode root) {
+    private static int _maxDiffUtil(BinaryTree root) {
         if (root == null) {
             return Integer.MAX_VALUE;
         }

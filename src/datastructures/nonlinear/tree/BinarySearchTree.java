@@ -1,22 +1,21 @@
 package datastructures.nonlinear.tree;
 
 
-import java.time.LocalDate;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-public class BST {
+public class BinarySearchTree {
     private int data;
-    private BST left;
-    private BST right;
+    private BinarySearchTree left;
+    private BinarySearchTree right;
 
-    private BST(int val) {
+    private BinarySearchTree(int val) {
         data = val;
         left = null;
         right = null;
     }
 
-    public static BST lowestCommonAncestor(BST root, BST p, BST q) {
+    public static BinarySearchTree lowestCommonAncestor(BinarySearchTree root, BinarySearchTree p, BinarySearchTree q) {
         while (root != null) {
             if (p.data < root.data && q.data < root.data) {
                 root = root.left;
@@ -30,10 +29,10 @@ public class BST {
     }
 
     // Get minimum element in binary search tree
-    private static BST minimumElement(BST root) {
+    private static BinarySearchTree minimumElement(BinarySearchTree root) {
         if (root.left == null)
             return root;
-        BST min = root;
+        BinarySearchTree min = root;
         while (min.left != null) {
             min = min.left;
         }
@@ -55,25 +54,22 @@ public class BST {
         return count;
     }
 
-    private BST insertNode(BST root, int key) {
-        // if the root is null, create a new node an return it
+    private BinarySearchTree insertNode(BinarySearchTree root, int key) {
         if (root == null) {
-            return new BST(key);
+            return new BinarySearchTree(key);
         }
 
-        // if given key is less than the root node, recur for left subtree
         if (key < root.data) {
             root.left = insertNode(root.left, key);
         }
 
-        // if given key is more than the root node, recur for right subtree
         else {
             root.right = insertNode(root.right, key);
         }
         return root;
     }
 
-    private BST deleteNode(BST root, int key) {
+    private BinarySearchTree deleteNode(BinarySearchTree root, int key) {
         if (root == null)
             return null;
 
@@ -92,8 +88,8 @@ public class BST {
 
             // current node have both left and right subtree.
         else {
-            BST successorParent = root;
-            BST successor = root.right;
+            BinarySearchTree successorParent = root;
+            BinarySearchTree successor = root.right;
             if (successor.left == null) {
                 root.data = successor.data;
                 successorParent.right = successor.right;
@@ -109,11 +105,11 @@ public class BST {
         }
     }
 
-    private boolean isBST(BST root) {
+    private boolean isBinarySearchTree(BinarySearchTree root) {
         return _bstChecker(root, Long.MIN_VALUE, Long.MAX_VALUE);
     }
 
-    private static boolean _bstChecker(BST root, long min, long max) {
+    private static boolean _bstChecker(BinarySearchTree root, long min, long max) {
         if (root == null) {
             return true;
         }
@@ -123,11 +119,11 @@ public class BST {
         return _bstChecker(root.left, min, (long) root.data - 1) && _bstChecker(root.right, (long) root.data + 1, max);
     }
 
-    private BST floor(BST root, int key) {
+    private BinarySearchTree floor(BinarySearchTree root, int key) {
         if (root == null) {
             return root;
         }
-        BST floor;
+        BinarySearchTree floor;
         if (root.data == key) {
             floor = root;
         } else if (root.data < key) {
@@ -141,13 +137,13 @@ public class BST {
         return floor;
     }
 
-    private BST ceil(BST root, int key) {
+    private BinarySearchTree ceil(BinarySearchTree root, int key) {
         if (root == null)
             return root;
         if (root.data == key) {
             return root;
         }
-        BST ceil;
+        BinarySearchTree ceil;
         if (key < root.data) {
             ceil = ceil(root.left, key);
             if (ceil == null) {
