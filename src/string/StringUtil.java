@@ -45,4 +45,39 @@ class StringUtil {
         }
         return true;
     }
+
+    /**
+     * Efficiently find first repeated character in a string without using any additional ds in a single traversal.
+     * @param str input string
+     * @return first repeated character
+     */
+    static int firstRepeatedCharacter(String str) {
+        int checker = 0;
+        for (int i = 0; i < str.length(); ++i) {
+            int val = (str.charAt(i)-'a');
+            if ((checker & (1 << val)) > 0)
+                return i;
+            checker |= (1 << val);
+        }
+        // all characters are non repeated
+        return -1;
+    }
+
+    public static int firstNotRepeatedCharacter(String input) {
+
+        // assuming extended ascii characters as well.
+        int[] flags = new int[256];
+
+        for (int i = 0; i < input.length(); i++) {
+            flags[input.charAt(i)]++ ;
+        }
+
+        for (int i = 0; i < input.length(); i++) {
+            if(flags[input.charAt(i)] == 1)
+                return i;
+        }
+        // all characters are repeated
+        return -1;
+    }
+
 }
