@@ -86,25 +86,19 @@ public class BinaryTree {
         if (root == null) {
             return result;
         }
-        while(root != null) {
-            stack.push(root);
-            root = root.left;
-        }
-
-        while(!stack.isEmpty()) {
-            BinaryTree t = stack.pop();
-            result.add(t.data);
-
-            t = t.right;
-            while(t != null) {
-                stack.push(t);
-                t = t.left;
+        while (root != null || !stack.isEmpty()) {
+            while (root !=  null) {
+                stack.push(root);
+                root = root.left;
             }
+            root = stack.pop();
+            result.add(root.data);
+            root = root.right;
         }
         return result;
     }
 
-    static List<Integer>  postorderTraversal(BinaryTree root, List<Integer> result) {
+    private static List<Integer>  postorderTraversal(BinaryTree root, List<Integer> result) {
         if (root != null) {
             postorderTraversal(root.left, result);
             postorderTraversal(root.right, result);
