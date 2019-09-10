@@ -63,6 +63,11 @@ class StringUtil {
         return -1;
     }
 
+    /**
+     * Find The First Non Repeated Character In A String
+     * @param input
+     * @return index of the first non repeated character in string
+     */
     public static int firstNotRepeatedCharacter(String input) {
 
         // assuming extended ascii characters as well.
@@ -79,5 +84,4 @@ class StringUtil {
         // all characters are repeated
         return -1;
     }
-
 }

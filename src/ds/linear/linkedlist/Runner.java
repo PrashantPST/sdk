@@ -1,6 +1,6 @@
-package datastructures.linear.linkedlist;
+package ds.linear.linkedlist;
 
-import static datastructures.linear.linkedlist.Node.insertAtMid;
+
 
 public class Runner {
     public static void main(String[] args) {
@@ -9,6 +9,6 @@ public class Runner {
         head.next.next = new Node(40);
         head.next.next.next = new Node(50);
         int x = 30;
-        insertAtMid(head, x);
+        Node.insertAtMid(head, x);
     }
 }
