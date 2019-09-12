@@ -431,4 +431,28 @@ public class BinaryTree {
         _maxAncestorDiff = Math.max(_maxAncestorDiff, val);
         return Math.min(Math.min(root.data, l), r);
     }
+
+    List<Integer> kthDistanceNodeFromRoot(BinaryTree node, int K, List<Integer> result) {
+        if (node == null)
+            return result;
+        if (K == 0) {
+            result.add(node.data);
+        }
+        else {
+            kthDistanceNodeFromRoot(node.left, K - 1, result);
+            kthDistanceNodeFromRoot(node.right, K - 1, result);
+        }
+        return result;
+    }
+
+    /**
+     * @param root
+     * @param target
+     * @param K
+     * @return Return a list of the values of all nodes that have a distance K from the target node.
+     * The answer can be returned in any order.
+     */
+    public List<Integer> distanceK(BinaryTree root, BinaryTree target, int K) {
+        return ;
+    }
 }

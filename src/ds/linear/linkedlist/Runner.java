@@ -4,11 +4,11 @@ package ds.linear.linkedlist;
 
 public class Runner {
     public static void main(String[] args) {
-        Node head = new Node(10);
-        head.next = new Node(20);
-        head.next.next = new Node(40);
-        head.next.next.next = new Node(50);
+        ListNode head = new ListNode(10);
+        head.next = new ListNode(20);
+        head.next.next = new ListNode(40);
+        head.next.next.next = new ListNode(50);
         int x = 30;
-        Node.insertAtMid(head, x);
+        ListNode.insertAtMid(head, x);
     }
 }
