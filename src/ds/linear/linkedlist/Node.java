@@ -4,7 +4,7 @@ class ListNode {
     private int data;
     ListNode next;
 
-    private ListNode(int payload) {
+    ListNode(int payload) {
         data = payload;
     }
 

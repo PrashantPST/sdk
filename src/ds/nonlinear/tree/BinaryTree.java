@@ -66,14 +66,14 @@ public class BinaryTree {
         stack.push(root);
 
         while (!stack.empty()) {
-            BinaryTree node = stack.pop();
-            result.add(node.data);
+            BinaryTree BinaryTree = stack.pop();
+            result.add(BinaryTree.data);
 
-            if (node.right != null) {
-                stack.push(node.right);
+            if (BinaryTree.right != null) {
+                stack.push(BinaryTree.right);
             }
-            if (node.left != null) {
-                stack.push(node.left);
+            if (BinaryTree.left != null) {
+                stack.push(BinaryTree.left);
             }
         }
         return result;
@@ -115,12 +115,12 @@ public class BinaryTree {
         List<List<Integer>> traversal = new ArrayList<>();
 
         if (root == null) return traversal;
-        int levelNodes;
+        int levelBinaryTrees;
         q.add(root);
         while (!q.isEmpty()) {
             List<Integer> temp = new ArrayList<>();
-            levelNodes = q.size();
-            while (levelNodes-- > 0) {
+            levelBinaryTrees = q.size();
+            while (levelBinaryTrees-- > 0) {
                 BinaryTree current = q.remove();
                 temp.add(current.data);
                 if (current.left != null) q.add(current.left);
@@ -161,11 +161,11 @@ public class BinaryTree {
 
     private Map<Integer, List<Integer>> verticalorder(BinaryTree root) {
         class _VerticalInfo {
-            private BinaryTree node;
+            private BinaryTree BinaryTree;
             private int horizontalDistance;
 
-            private _VerticalInfo(BinaryTree node, int horizontalDistance) {
-                this.node = node;
+            private _VerticalInfo(BinaryTree BinaryTree, int horizontalDistance) {
+                this.BinaryTree = BinaryTree;
                 this.horizontalDistance = horizontalDistance;
             }
         }
@@ -183,12 +183,12 @@ public class BinaryTree {
             if (!verticalView.containsKey(current.horizontalDistance)) {
                 verticalView.put(current.horizontalDistance, new ArrayList<>());
             }
-            verticalView.get(current.horizontalDistance).add(current.node.data);
-            if (current.node.left != null) {
-                q.add(new _VerticalInfo(current.node.left, current.horizontalDistance - 1));
+            verticalView.get(current.horizontalDistance).add(current.BinaryTree.data);
+            if (current.BinaryTree.left != null) {
+                q.add(new _VerticalInfo(current.BinaryTree.left, current.horizontalDistance - 1));
             }
-            if (current.node.right != null) {
-                q.add(new _VerticalInfo(current.node.right, current.horizontalDistance + 1));
+            if (current.BinaryTree.right != null) {
+                q.add(new _VerticalInfo(current.BinaryTree.right, current.horizontalDistance + 1));
             }
         }
         return verticalView;
@@ -245,12 +245,12 @@ public class BinaryTree {
         queue.add(root);
 
         if (root == null) return res;
-        int levelNodes;
+        int levelBinaryTrees;
         boolean flag;
         while (!queue.isEmpty()) {
             flag = true;
-            levelNodes = queue.size();
-            while (levelNodes-- > 0) {
+            levelBinaryTrees = queue.size();
+            while (levelBinaryTrees-- > 0) {
                 BinaryTree curr = queue.poll();
                 if (flag)
                     res.add(curr.data);
@@ -398,20 +398,20 @@ public class BinaryTree {
         return _maxSum;
     }
 
-    private int _findMaxUtil(BinaryTree node) {
-        if (node == null)
+    private int _findMaxUtil(BinaryTree BinaryTree) {
+        if (BinaryTree == null)
             return 0;
 
-        int l = _findMaxUtil(node.left);
-        int r = _findMaxUtil(node.right);
-        int curr = Math.max(Math.max(l, r) + node.data, node.data);
-        _maxSum = Math.max(Math.max(_maxSum, curr), l + r + node.data);
+        int l = _findMaxUtil(BinaryTree.left);
+        int r = _findMaxUtil(BinaryTree.right);
+        int curr = Math.max(Math.max(l, r) + BinaryTree.data, BinaryTree.data);
+        _maxSum = Math.max(Math.max(_maxSum, curr), l + r + BinaryTree.data);
         return curr;
     }
 
     /**
      * @param root pointer to the root of a Binary tree
-     * @return maximum difference between node and its ancestor
+     * @return maximum difference between BinaryTree and its ancestor
      */
     private static int maxAncestorDiff(BinaryTree root) {
         _maxAncestorDiff= Integer.MIN_VALUE;
@@ -432,27 +432,16 @@ public class BinaryTree {
         return Math.min(Math.min(root.data, l), r);
     }
 
-    List<Integer> kthDistanceNodeFromRoot(BinaryTree node, int K, List<Integer> result) {
+    private List<Integer> kthDistanceNodeInSubtree(BinaryTree node, int K, List<Integer> result) {
         if (node == null)
             return result;
         if (K == 0) {
             result.add(node.data);
         }
         else {
-            kthDistanceNodeFromRoot(node.left, K - 1, result);
-            kthDistanceNodeFromRoot(node.right, K - 1, result);
+            kthDistanceNodeInSubtree(node.left, K - 1, result);
+            kthDistanceNodeInSubtree(node.right, K - 1, result);
         }
         return result;
-    }
-
-    /**
-     * @param root
-     * @param target
-     * @param K
-     * @return Return a list of the values of all nodes that have a distance K from the target node.
-     * The answer can be returned in any order.
-     */
-    public List<Integer> distanceK(BinaryTree root, BinaryTree target, int K) {
-        return ;
     }
 }
