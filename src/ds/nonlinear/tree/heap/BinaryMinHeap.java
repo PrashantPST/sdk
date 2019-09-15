@@ -7,8 +7,7 @@ public class BinaryMinHeap extends BinaryHeap {
     }
 
 
-    private void minHeapify(int i) {
-
+    private void minHeapify(int i, int heapSize) {
         int l = leftChildIndex(i);
         int r = rightChildIndex(i);
         int smallest = i;
@@ -19,7 +18,7 @@ public class BinaryMinHeap extends BinaryHeap {
             smallest = r;
         if (smallest != i) {
             heap[i] = heap[smallest] + heap[i] - (heap[smallest] = heap[i]);
-            minHeapify(smallest);
+            minHeapify(smallest, heapSize);
         }
     }
 
@@ -38,10 +37,10 @@ public class BinaryMinHeap extends BinaryHeap {
     }
 
     private void buildMinHeap() {
-        int startIdx = (heapSize - 2)/2;
+        int startIdx = (heapSize - 2 ) / 2;
 
         for(int i = startIdx; i >= 0; i--) {
-            minHeapify(i);
+            minHeapify(i, heapSize);
         }
     }
 

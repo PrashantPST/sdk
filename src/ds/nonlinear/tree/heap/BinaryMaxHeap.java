@@ -6,7 +6,7 @@ public class BinaryMaxHeap extends BinaryHeap {
         super(capacity);
     }
 
-    private void maxHeapify(int i) {
+    private void maxHeapify(int i, int heapSize) {
         int l = leftChildIndex(i);
         int r = rightChildIndex(i);
         int largest = i;
@@ -16,7 +16,7 @@ public class BinaryMaxHeap extends BinaryHeap {
             largest = r;
         if (largest != i) {
             heap[i] = heap[largest] + heap[i] - (heap[largest] = heap[i]);
-            maxHeapify(largest);
+            maxHeapify(largest, heapSize);
         }
     }
 
@@ -35,11 +35,14 @@ public class BinaryMaxHeap extends BinaryHeap {
     }
 
     void buildMaxHeap() {
-        int startIdx = (heapSize - 2)/2;
+        int startIdx = (heapSize - 2) / 2;
 
         for(int i = startIdx; i >= 0; i--) {
-            maxHeapify(i);
+            maxHeapify(i, heapSize);
         }
     }
 
+    public static void main(String[] args) {
+        BinaryMaxHeap minHeap = new BinaryMaxHeap(10);
+    }
 }
