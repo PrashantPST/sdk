@@ -1,5 +1,7 @@
 package ds.nonlinear.tree.heap;
 
+import java.util.*;
+
 public class BinaryMinHeap extends BinaryHeap {
 
     private BinaryMinHeap(int capacity) {
@@ -42,6 +44,39 @@ public class BinaryMinHeap extends BinaryHeap {
         for(int i = startIdx; i >= 0; i--) {
             minHeapify(i, heapSize);
         }
+    }
+
+    /**
+     * @param nums
+     * @param K
+     * @return
+     */
+    public List<Integer> topKFrequent(int[] nums, int K) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int num : nums) {
+            map.put(num, map.getOrDefault(num, 0) + 1);
+        }
+
+        // create a min heap
+        PriorityQueue<Map.Entry<Integer, Integer>> queue = new PriorityQueue<>(Comparator.comparing(Map.Entry::getValue));
+
+        //maintain a heap of size k.
+        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+            queue.offer(entry);
+            if (queue.size() > K) {
+                queue.poll();
+            }
+        }
+
+        //get all elements from the heap
+        List<Integer> result = new ArrayList<>();
+        while (queue.size() > 0) {
+            result.add(queue.poll().getKey());
+        }
+
+        Collections.reverse(result);
+
+        return result;
     }
 
     public static void main(String[] args) {

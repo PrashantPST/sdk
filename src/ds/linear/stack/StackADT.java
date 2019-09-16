@@ -1,4 +1,4 @@
-package datastructures.linear.stack;
+package ds.linear.stack;
 
 import java.util.EmptyStackException;
 import java.util.Stack;
