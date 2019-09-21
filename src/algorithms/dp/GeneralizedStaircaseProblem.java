@@ -1,4 +1,4 @@
-package algorithms.dynamicprogramming;
+package algorithms.dp;
 
 public class GeneralizedStaircaseProblem {
     private static final int MAX_STEPS = 2;

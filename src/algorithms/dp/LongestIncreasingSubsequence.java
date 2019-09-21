@@ -1,4 +1,4 @@
-package algorithms.dynamicprogramming;
+package algorithms.dp;
 
 public class LongestIncreasingSubsequence {
 }
