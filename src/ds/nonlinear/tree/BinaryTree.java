@@ -5,10 +5,10 @@ import java.util.stream.IntStream;
 
 public class BinaryTree {
     private int data;
-    private BinaryTree left;
-    private BinaryTree right;
+    BinaryTree left;
+    BinaryTree right;
 
-    private BinaryTree(int val) {
+    BinaryTree(int val) {
         data = val;
         left = null;
         right = null;

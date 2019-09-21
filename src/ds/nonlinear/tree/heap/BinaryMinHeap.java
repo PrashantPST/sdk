@@ -46,11 +46,6 @@ public class BinaryMinHeap extends BinaryHeap {
         }
     }
 
-    /**
-     * @param nums
-     * @param K
-     * @return
-     */
     public static List<Integer> topKFrequent(int[] nums, int K) {
         Map<Integer, Integer> map = new HashMap<>();
         for (int num : nums) {
@@ -74,9 +69,5 @@ public class BinaryMinHeap extends BinaryHeap {
             result.add(queue.poll().getKey());
         }
         return result;
-    }
-
-    public static void main(String[] args) {
-        BinaryMinHeap minHeap = new BinaryMinHeap(10);
     }
 }
