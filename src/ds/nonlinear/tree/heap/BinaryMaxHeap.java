@@ -2,7 +2,7 @@ package ds.nonlinear.tree.heap;
 
 public class BinaryMaxHeap extends BinaryHeap {
 
-    BinaryMaxHeap(int capacity) {
+    private BinaryMaxHeap(int capacity) {
         super(capacity);
     }
 
