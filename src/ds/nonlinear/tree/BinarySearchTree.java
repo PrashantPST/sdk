@@ -58,11 +58,9 @@ public class BinarySearchTree {
         if (root == null) {
             return new BinarySearchTree(key);
         }
-
         if (key < root.data) {
             root.left = insertNode(root.left, key);
         }
-
         else {
             root.right = insertNode(root.right, key);
         }
