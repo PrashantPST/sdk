@@ -1,7 +1,12 @@
 package ds.nonlinear.graph;
 
 import java.util.LinkedList;
+
 class Graph {
+    private static final int WHITE = 0;
+    private static final int GRAY = 1;
+    private static final int BLACK = 2;
+
     private int V;
     private LinkedList<Integer>[] adjListArray;
 
@@ -86,6 +91,31 @@ class Graph {
             }
         }
         return count;
+    }
+
+    private static boolean DFSUtil(Graph g, int u, int[] color) {
+        color[u] = GRAY;
+
+        for (Integer in : g.adjListArray[u]) {
+            if (color[in] == GRAY)
+                return true;
+            if (color[in] == WHITE && DFSUtil(g, in, color))
+                return true;
+        }
+        color[u] = BLACK;
+        return false;
+    }
+
+    static boolean isCyclic(Graph g) {
+
+        int[] color = new int[g.V];
+        for (int i = 0; i < g.V; i++) {
+            if (color[i] == WHITE) {
+                if(DFSUtil(g, i, color))
+                    return true;
+            }
+        }
+        return false;
     }
 
     public static void main(String[] args) {
