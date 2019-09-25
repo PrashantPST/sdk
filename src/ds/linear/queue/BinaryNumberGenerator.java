@@ -7,7 +7,6 @@ public class BinaryNumberGenerator {
     public static void main(String[] args) {
         int n = 7;
         generate(n);
-        System.out.println();
     }
     private static void generate(int n) {
         Queue<String> q = new LinkedList<>();
