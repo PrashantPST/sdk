@@ -1,4 +1,4 @@
-package immutable;
+package core.immutable;
 
 import java.util.ArrayList;
 import java.util.List;

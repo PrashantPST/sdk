@@ -1,4 +1,4 @@
-package immutable;
+package core.immutable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,9 +21,7 @@ public class Hack {
         hobbitStuff.remove("Ring of Power");
         hobbitStuff.remove("Sword");
 
-        System.out.println();
         System.out.println("Immutability has been hacked!");
-        System.out.println();
 
         System.out.println("Hobbit country: " + hobbit.getAddress().getCountry());
         System.out.println("Hobbit city: " + hobbit.getAddress().getCity());

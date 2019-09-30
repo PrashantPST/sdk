@@ -1,4 +1,4 @@
-package immutable;
+package core.immutable;
 
 class Address {
     private String country;
