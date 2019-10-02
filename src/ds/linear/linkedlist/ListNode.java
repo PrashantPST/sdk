@@ -69,4 +69,14 @@ class ListNode {
         }
         return res;
     }
+
+    int getCount(ListNode node) {
+        ListNode current = node;
+        int count = 0;
+        while (current != null) {
+            count++;
+            current = current.next;
+        }
+        return count;
+    }
 }

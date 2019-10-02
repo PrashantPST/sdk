@@ -13,7 +13,6 @@ import static org.junit.Assert.*;
  */
 public class PersonTest {
 
-
     @Test
     public void testEquals() {
         Person james = new Person(21, "James", 34, new Date(1980, Calendar.DECEMBER, 1));
