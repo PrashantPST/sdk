@@ -1,6 +1,8 @@
 package core;
 
-class PrintDemo {
+import java.util.Hashtable;
+
+class PrintDemo extends Hashtable {
     void printCount() {
         try {
             for(int i = 15; i > 0; i--) {
