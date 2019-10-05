@@ -2,11 +2,7 @@ package core;
 
 import java.util.Date;
 
-/**
- * Simple Java Class to represent Person with name, id and date of birth.
- *
- * @author Prashant Kumar
- */
+
 public class Person implements Comparable<Person> {
 
     private int id;

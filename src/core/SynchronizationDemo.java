@@ -50,13 +50,5 @@ public class SynchronizationDemo {
 
         T1.start();
         T2.start();
-
-        try {
-            T1.join();
-            T2.join();
-        }
-        catch(Exception e) {
-            System.out.println("Interrupted");
-        }
     }
 }

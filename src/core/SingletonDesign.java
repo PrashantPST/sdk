@@ -20,7 +20,6 @@ public class SingletonDesign {
 
         text1.str = (text1.str).toUpperCase();
         System.out.println("String in Upper Case " + text2.str);
-        System.out.println("");
 
         text2.str = (text2.str).toLowerCase();
         System.out.println("String in Lower Case " + text1.str);
