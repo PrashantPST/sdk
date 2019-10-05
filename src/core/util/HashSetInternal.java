@@ -1,22 +1,19 @@
 package core.util;
 
 import java.io.Serializable;
-import java.util.AbstractSet;
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Set;
 
-public class HashSetInternal<E> extends AbstractSet<E> implements Set<E>, Cloneable, Serializable {
+public class HashSetInternal<E> extends AbstractSetInternal<E> implements SetInternal<E>, Cloneable, Serializable {
 
     static final long serialVersionUID = -50247444067133216L;
 
     private static final Object PRESENT = new Object();
 
     public HashSetInternal() {
-        map = new HashMap<>();
+        map = new HashMapInternal<>();
     }
 
-    private transient HashMap<E, Object> map;
+    private transient HashMapInternal<E, Object> map;
 
     public int size() {
         return map.size();
@@ -45,4 +42,6 @@ public class HashSetInternal<E> extends AbstractSet<E> implements Set<E>, Clonea
     public boolean remove(Object o) {
         return map.remove(o) == PRESENT;
     }
+
+
 }
