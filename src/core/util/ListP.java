@@ -1,9 +1,6 @@
 package core.util;
 
-import java.util.Iterator;
-import java.util.ListIterator;
-
-public interface ListInternal<E> extends CollectionInternal<E> {
+public interface ListP<E> extends CollectionP<E> {
 
     int size();
 
@@ -11,7 +8,7 @@ public interface ListInternal<E> extends CollectionInternal<E> {
 
     boolean contains(Object o);
 
-    Iterator<E> iterator();
+    IteratorP<E> iterator();
 
     Object[] toArray();
 
@@ -19,13 +16,13 @@ public interface ListInternal<E> extends CollectionInternal<E> {
 
     boolean remove(Object o);
 
-    boolean containsAll(CollectionInternal<?> c);
+    boolean containsAll(CollectionP<?> c);
 
-    boolean addAll(CollectionInternal<? extends E> c);
+    boolean addAll(CollectionP<? extends E> c);
 
-    boolean addAll(int index, CollectionInternal<? extends E> c);
+    boolean addAll(int index, CollectionP<? extends E> c);
 
-    boolean removeAll(CollectionInternal<?> c);
+    boolean removeAll(CollectionP<?> c);
 
     void clear();
 
@@ -45,5 +42,5 @@ public interface ListInternal<E> extends CollectionInternal<E> {
 
     int lastIndexOf(Object o);
 
-    ListIterator<E> listIterator();
+    ListIteratorInternal<E> listIterator();
 }

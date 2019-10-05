@@ -1,8 +1,6 @@
 package core.util;
 
-import java.util.Iterator;
-
-public abstract class AbstractCollectionInternal<E> implements CollectionInternal<E> {
+public abstract class AbstractCollectionP<E> implements CollectionP<E> {
 
     public abstract int size();
 
@@ -11,7 +9,7 @@ public abstract class AbstractCollectionInternal<E> implements CollectionInterna
     }
 
     public boolean contains(Object o) {
-        Iterator<E> it = iterator();
+        IteratorP<E> it = iterator();
         if (o == null) {
             while (it.hasNext())
                 if (it.next() == null)
@@ -24,7 +22,7 @@ public abstract class AbstractCollectionInternal<E> implements CollectionInterna
         return false;
     }
 
-    public boolean containsAll(CollectionInternal<?> c) {
+    public boolean containsAll(CollectionP<?> c) {
         for (Object e : c)
             if (!contains(e))
                 return false;

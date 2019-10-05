@@ -1,6 +1,6 @@
 package core.util;
 
-public interface MapInternal<K, V> {
+public interface MapP<K, V> {
 
     int size();
 
@@ -18,7 +18,7 @@ public interface MapInternal<K, V> {
 
     void clear();
 
-    SetInternal<K> keySet();
+    SetP<K> keySet();
 
     interface Entry<K,V> {
 

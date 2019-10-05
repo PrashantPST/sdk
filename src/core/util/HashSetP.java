@@ -1,19 +1,19 @@
 package core.util;
 
-import java.io.Serializable;
-import java.util.Iterator;
+import core.io.SerializableP;
+import core.lang.CloneableP;
 
-public class HashSetInternal<E> extends AbstractSetInternal<E> implements SetInternal<E>, Cloneable, Serializable {
+public class HashSetP<E> extends AbstractSetP<E> implements SetP<E>, CloneableP, SerializableP {
 
     static final long serialVersionUID = -50247444067133216L;
 
     private static final Object PRESENT = new Object();
 
-    public HashSetInternal() {
-        map = new HashMapInternal<>();
+    public HashSetP() {
+        map = new HashMapP<>();
     }
 
-    private transient HashMapInternal<E, Object> map;
+    private transient HashMapP<E, Object> map;
 
     public int size() {
         return map.size();
@@ -27,7 +27,7 @@ public class HashSetInternal<E> extends AbstractSetInternal<E> implements SetInt
         return map.containsKey(o);
     }
 
-    public Iterator<E> iterator() {
+    public IteratorP<E> iterator() {
         return map.keySet().iterator();
     }
 
