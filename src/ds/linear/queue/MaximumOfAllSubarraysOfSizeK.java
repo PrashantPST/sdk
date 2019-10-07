@@ -9,14 +9,14 @@ import java.util.LinkedList;
  * The task is to find the maximum element of every sub-array of size k.
  * TC: O(n) && SC: O(k)
  */
-public class MaximumOfAllSubarrayOfSizeK {
+public class MaximumOfAllSubarraysOfSizeK {
     public static void main(String[] args) {
-        int[] arr = { 3, 4, 5, 6, 6};
+        int[] arr = { 3, 4, 5, 6, 6, 12, 21, 5, 6 };
         int k = 4;
-        System.out.println(Arrays.toString(maximumOfAllSubarray(arr, k)));
+        System.out.println(Arrays.toString(maximumOfAllSubarrays(arr, k)));
     }
 
-    private static int[] maximumOfAllSubarray(int[] nums, int k) {
+    private static int[] maximumOfAllSubarrays(int[] nums, int k) {
         int[] temp = new int[nums.length - k + 1];
         int itr = -1;
         Deque<Integer> deque = new LinkedList<>();
@@ -25,15 +25,17 @@ public class MaximumOfAllSubarrayOfSizeK {
             if(nums[idx] < nums[i])
                 idx = i;
         }
-        deque.addLast(idx);
+        deque.offerLast(idx);
+
         for (int i = k; i < nums.length ; i++) {
             temp[++itr] = nums[deque.peekFirst()];
             while(!deque.isEmpty() && deque.peekFirst() <= i - k)
-                deque.removeFirst();
+                deque.pollFirst();
             while(!deque.isEmpty() && nums[deque.peekLast()] <= nums[i])
-                deque.removeLast();
-            deque.addLast(i);
+                deque.pollLast();
+            deque.offerLast(i);
         }
+
         temp[++itr] = nums[deque.peekFirst()];
         return temp;
     }
