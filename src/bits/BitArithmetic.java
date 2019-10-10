@@ -1,6 +1,6 @@
 package bits;
 
-public class Bit {
+public class BitArithmetic {
 
     /**
      * @return true or false whether index bit is set or not.

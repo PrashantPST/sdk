@@ -8,9 +8,33 @@ import java.util.List;
 
 public class Array {
 
+    private static final int INT_SIZE = 32;
+
     public static void main(String[] args) {
-        int[] arr = new int[] { 1, 5, 4, 3, 2 };
-        System.out.println(minSwaps(arr));
+        int[] arr = new int[] { 12, 1, 12, 13, 2, 8, 2, 3, 8, 12, 1, 1, 2, 3, 3, 8 };
+        System.out.println(findUniqueNumber(arr));
+    }
+
+    /**
+     * Given an array where every element occurs three times, except one element which occurs only once.
+     * Find that element that occurs once. Expected time complexity is O(n) and O(1) extra space.
+     */
+    private static int findUniqueNumber(int[] arr) {
+        int result = 0;
+
+        for(int i = 0; i < INT_SIZE; i++) {
+            int sum = 0;
+            for (int value : arr) {
+                int val = (value & (1 << i));
+                if (val != 0) {
+                    sum += 1;
+                }
+            }
+            if (sum % 3 != 0) {
+                result |= (1 << i);
+            }
+        }
+        return result;
     }
 
     private static void merge(int[] nums1, int m, int[] nums2, int n) {
