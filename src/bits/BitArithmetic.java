@@ -5,15 +5,15 @@ public class BitArithmetic {
     /**
      * @return true or false whether index bit is set or not.
      */
-    private static boolean testBitSet(int number, int index) {
+    public static boolean testBitSet(int number, int index) {
         int mask = 1 << index;
         return (number & mask) != 0;
     }
 
     /**
-     * @return number after setting index bit of given number
+     * @return number after setting index'th bit of a given number
      */
-    private static int setBit(int number, int index) {
+    private static int setIndexPositionBit(int number, int index) {
         int mask = 1 << index;
         return number | mask;
     }

@@ -3,16 +3,58 @@ package ds.linear.arrays;
 import javafx.util.Pair;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+
+import static bits.BitArithmetic.testBitSet;
 
 public class Array {
 
     private static final int INT_SIZE = 32;
 
     public static void main(String[] args) {
-        int[] arr = new int[] { 12, 1, 12, 13, 2, 8, 2, 3, 8, 12, 1, 1, 2, 3, 3, 8 };
-        System.out.println(findUniqueNumber(arr));
+        int[] arr = new int[] { 2, 1, 12, 3, 2, 1, 5, 6, 7, 3, 7, 8, 9, 12, 34, 8, 6, 34 };
+        System.out.println(Arrays.toString(findTwoUniqueNumbers(arr)));
+    }
+
+
+    /**
+     * Given an array in which all numbers except two are repeated once. (i.e. we have 2n+2 numbers and n numbers are occurring
+     * twice and remaining two have occurred once). Find those two numbers in the most efficient way.
+     */
+    private static int[] findTwoUniqueNumbers(int[] arr) {
+        int xOr = 0;
+        int a = 0;
+        int b = 0;
+        int k = 0;
+        for (int ar: arr) {
+            xOr ^= ar;
+        }
+        while (!testBitSet(xOr, k)) {
+            k++;
+        }
+        for (int e: arr) {
+            if (testBitSet(e, k)) {
+                a ^= e;
+            }
+            else {
+                b ^= e;
+            }
+        }
+        return new int[] { a, b};
+    }
+
+    /**
+     * An array A with all elements occurring twice except for x that occur once.
+     * Find the element x in O(1) space and O(N) time
+     */
+    private static int find(int[] arr) {
+        int x = 0;
+        for (int value : arr) {
+            x ^= value;
+        }
+        return x;
     }
 
     /**
