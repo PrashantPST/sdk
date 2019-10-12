@@ -6,18 +6,25 @@ import java.util.Map;
 class StringUtil {
 
     public static void main(String[] args) {
-
+        System.out.println(areAnagram("aa", "bb"));
+        System.out.println(areAnagram("listen", "silent"));
+        System.out.println(areAnagram("triangle", "integral"));
     }
 
-    static boolean areAnagram(String str1, String str2) {
+    private static boolean areAnagram(String str1, String str2) {
         if (str1.length() != str2.length())
             return false;
-        int value = 0;
-        for (int i = 0; i < str1.length(); i++) {
-            value ^= str1.charAt(i);
-            value ^= str2.charAt(i);
+        int[] count = new int[256];
+        for(int i = 0; i < str1.length(); i++) {
+            count[str1.charAt(i)] += 1;
+            count[str2.charAt(i)] -= 1;
         }
-        return value == 0;
+        for (int e: count) {
+            if (e != 0) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /*
