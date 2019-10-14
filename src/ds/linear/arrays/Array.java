@@ -14,6 +14,7 @@ public class Array {
     private static final int INT_SIZE = 32;
 
     public static void main(String[] args) {
+
         int[] arr = new int[] { 2, 1, 12, 3, 2, 1, 5, 6, 7, 3, 7, 8, 9, 12, 34, 8, 6, 34 };
         System.out.println(Arrays.toString(findTwoUniqueNumbers(arr)));
     }
@@ -49,7 +50,7 @@ public class Array {
      * An array A with all elements occurring twice except for x that occur once.
      * Find the element x in O(1) space and O(N) time
      */
-    private static int find(int[] arr) {
+    private static int findUnique(int[] arr) {
         int x = 0;
         for (int value : arr) {
             x ^= value;

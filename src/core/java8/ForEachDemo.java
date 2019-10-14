@@ -10,5 +10,6 @@ public class ForEachDemo {
 
         // demonstration of reduce method
         int even = number.stream().filter(x -> (x % 2 == 0)).reduce(0, Integer::sum);
+        System.out.println(even);
     }
 }
