@@ -17,9 +17,10 @@ public class Array {
 
         int[] arr = new int[] { 2, 1, 12, 3, 2, 1, 5, 6, 7, 3, 7, 8, 9, 12, 34, 8, 6, 34 };
         System.out.println(Arrays.toString(findTwoUniqueNumbers(arr)));
+        System.out.println(Arrays.toString(getProductsOfAllIntsExceptAtIndex(arr)));
     }
 
-    public static int[] getProductsOfAllIntsExceptAtIndex(int[] intArray) {
+    private static int[] getProductsOfAllIntsExceptAtIndex(int[] intArray) {
 
         if (intArray.length < 2) {
             throw new IllegalArgumentException("Getting the product of numbers at other indices requires at least 2 numbers");
