@@ -3,7 +3,6 @@ package ds.linear.arrays;
 import javafx.util.Pair;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
@@ -15,9 +14,30 @@ public class Array {
 
     public static void main(String[] args) {
 
-        int[] arr = new int[] { 2, 1, 12, 3, 2, 1, 5, 6, 7, 3, 7, 8, 9, 12, 34, 8, 6, 34 };
-        System.out.println(Arrays.toString(findTwoUniqueNumbers(arr)));
-        System.out.println(Arrays.toString(getProductsOfAllIntsExceptAtIndex(arr)));
+        int[][] arr = {
+                {0, 0, 1, 1},
+                {0, 1, 1, 1},
+                {0, 0, 0, 1},
+                {0, 1, 1, 1},
+                {0, 0, 1, 1}
+        };
+       findMaximumOnes(arr);
+    }
+
+    private static void findMaximumOnes(int[][] arr) {
+        int col = arr[0].length;
+        int row = 0;
+        int c = col - 1;
+        for (int r = 0; r < arr.length; r++) {
+            while (c >= 0 && arr[r][c] == 1) {
+                row = r;
+                c--;
+            }
+            if (c < 0) {
+                break;
+            }
+        }
+        System.out.println("Row index = "+row+", number of maximum one's = "+(col - c - 1));
     }
 
     private static int[] getProductsOfAllIntsExceptAtIndex(int[] intArray) {
@@ -60,21 +80,20 @@ public class Array {
         int a = 0;
         int b = 0;
         int k = 0;
-        for (int ar: arr) {
+        for (int ar : arr) {
             xOr ^= ar;
         }
         while (!testBitSet(xOr, k)) {
             k++;
         }
-        for (int e: arr) {
+        for (int e : arr) {
             if (testBitSet(e, k)) {
                 a ^= e;
-            }
-            else {
+            } else {
                 b ^= e;
             }
         }
-        return new int[] { a, b};
+        return new int[]{a, b};
     }
 
     /**
@@ -96,7 +115,7 @@ public class Array {
     private static int findUniqueNumber(int[] arr) {
         int result = 0;
 
-        for(int i = 0; i < INT_SIZE; i++) {
+        for (int i = 0; i < INT_SIZE; i++) {
             int sum = 0;
             for (int value : arr) {
                 int val = (value & (1 << i));
@@ -117,14 +136,13 @@ public class Array {
         int index = m + n - 1;
 
         while (p1 >= 0 && p2 >= 0) {
-            if(nums1[p1] <= nums2[p2]) {
+            if (nums1[p1] <= nums2[p2]) {
                 nums1[index--] = nums2[p2--];
-            }
-            else {
+            } else {
                 nums1[index--] = nums1[p1--];
             }
         }
-        while(p2 >= 0) {
+        while (p2 >= 0) {
             nums1[index--] = nums2[p2--];
         }
     }
@@ -133,7 +151,7 @@ public class Array {
 
         int n = arr.length;
 
-        List<Pair<Integer, Integer> > arrpos = new ArrayList<>();
+        List<Pair<Integer, Integer>> arrpos = new ArrayList<>();
         for (int i = 0; i < n; i++)
             arrpos.add(new Pair<>(arr[i], i));
 
@@ -143,7 +161,7 @@ public class Array {
 
         int ans = 0;
 
-        for(int i = 0; i < n; i++) {
+        for (int i = 0; i < n; i++) {
             if (visited[i] || arrpos.get(i).getValue() == i)
                 continue;
 
@@ -155,7 +173,7 @@ public class Array {
                 cycleSize++;
             }
 
-            if(cycleSize > 0) {
+            if (cycleSize > 0) {
                 ans += (cycleSize - 1);
             }
         }
