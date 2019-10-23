@@ -70,7 +70,7 @@ class ListNode {
         return res;
     }
 
-    int getCount(ListNode node) {
+    int getCountOfNodes(ListNode node) {
         ListNode current = node;
         int count = 0;
         while (current != null) {
@@ -78,5 +78,41 @@ class ListNode {
             current = current.next;
         }
         return count;
+    }
+
+    /**
+     * For example, if the linked list is 1->2->3->4->5 then the function should change it to 2->1->4->3->5
+     */
+    private ListNode swapAdjacentNodes(ListNode head) {
+        // If linked list is empty or there is only one node in list
+        if (head == null || head.next == null) {
+            return head;
+        }
+
+        // Initialize previous and current pointers
+        ListNode previous = head;
+        ListNode current = head.next;
+
+        head = current; // Change head before proceeeding
+
+        // Traverse the list
+        while (true) {
+            ListNode next = current.next;
+            current.next = previous; // Change next of current as previous node
+
+            // If next is NULL or the last node
+            if (next == null || next.next == null) {
+                previous.next = next;
+                break;
+            }
+
+            // Change next of previous to next next
+            previous.next = next.next;
+
+            // Update previous and curr
+            previous = next;
+            current = previous.next;
+        }
+        return head;
     }
 }
