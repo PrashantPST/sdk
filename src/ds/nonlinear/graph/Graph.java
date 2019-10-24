@@ -1,43 +1,44 @@
 package ds.nonlinear.graph;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 class Graph {
     private static final int WHITE = 0;
     private static final int GRAY = 1;
     private static final int BLACK = 2;
 
-    private int V;
-    private LinkedList<Integer>[] adjListArray;
+    private static int vertices;
+
+    private static ArrayList<Integer>[] graph = new ArrayList[vertices];
+
+    private Graph(int[][] edges) {
+        for (int[] edge : edges) {
+            int u = edge[0];
+            int v = edge[1];
+            addEdge(graph, u, v);
+        }
+    }
+
+
+
 
     private static int[] rowNbr = new int[] { -1, -1, -1, 0, 0, 1, 1, 1 };
     private static int[] colNbr = new int[] { -1, 0, 1, -1, 1, -1, 0, 1 };
 
-    private Graph(int V) {
-        this.V = V;
-        // define the size of array as
-        // number of vertices
-        adjListArray = new LinkedList[V];
-
-        for(int i = 0; i < V ; i++) {
-            adjListArray[i] = new LinkedList<>();
-        }
-    }
-
     // Adds an edge to an undirected graph
-    private void addEdge(int src, int dest) {
+    private void addEdge(ArrayList<Integer>[] graph, int src, int dest) {
         // Add an edge from src to dest.
-        adjListArray[src].add(dest);
+        graph[src].add(dest);
 
-        // Since graph is undirected, add an edge from dest to src also
-        adjListArray[dest].add(src);
+        // If the given graph is undirected one, add an edge from dest to src also
+        graph[dest].add(src);
     }
 
     private void DFSUtil(int v, boolean[] visited) {
         visited[v] = true;
         System.out.print(v+" ");
 
-        for (int x : adjListArray[v]) {
+        for (int x : graph[v]) {
             if(!visited[x]) {
                 DFSUtil(x, visited);
             }
@@ -49,8 +50,8 @@ class Graph {
      */
     private int connectedComponents() {
         int count = 0;
-        boolean[] visited = new boolean[V];
-        for(int v = 0; v < V; ++v) {
+        boolean[] visited = new boolean[vertices];
+        for(int v = 0; v < vertices; ++v) {
             if(!visited[v]) {
                 DFSUtil(v, visited);
                 // The number of calls to DFSUtil() = number of connected components.
@@ -93,13 +94,13 @@ class Graph {
         return count;
     }
 
-    private static boolean DFSUtil(Graph g, int u, int[] color) {
+    private static boolean DFSUtil(int u, int[] color) {
         color[u] = GRAY;
 
-        for (Integer in : g.adjListArray[u]) {
+        for (Integer in : graph[u]) {
             if (color[in] == GRAY)
                 return true;
-            if (color[in] == WHITE && DFSUtil(g, in, color))
+            if (color[in] == WHITE && DFSUtil(in, color))
                 return true;
         }
         color[u] = BLACK;
@@ -108,10 +109,10 @@ class Graph {
 
     static boolean isCyclic(Graph g) {
 
-        int[] color = new int[g.V];
-        for (int i = 0; i < g.V; i++) {
+        int[] color = new int[vertices];
+        for (int i = 0; i < vertices; i++) {
             if (color[i] == WHITE) {
-                if(DFSUtil(g, i, color))
+                if(DFSUtil(i, color))
                     return true;
             }
         }
@@ -126,16 +127,6 @@ class Graph {
                 {0, 0, 0, 0, 0},
                 {1, 0, 1, 0, 1}
         };
-
-        Graph g = new Graph(5); // 5 vertices numbered from 0 to 4
-
-        g.addEdge(1, 0);
-        g.addEdge(2, 3);
-        g.addEdge(3, 4);
-        System.out.println("Following are connected components");
-        System.out.println("Count of connected components = "+g.connectedComponents());
-
-        System.out.println("Number of islands = "+countIslands(M, 5, 5));
     }
 }
 

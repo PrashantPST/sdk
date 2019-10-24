@@ -4,7 +4,7 @@ class ListNode {
     private int data;
     ListNode next;
 
-    ListNode(int payload) {
+    private ListNode(int payload) {
         data = payload;
     }
 
@@ -105,7 +105,6 @@ class ListNode {
                 previous.next = next;
                 break;
             }
-
             // Change next of previous to next next
             previous.next = next.next;
 
