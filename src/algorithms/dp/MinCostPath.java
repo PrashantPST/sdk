@@ -8,7 +8,8 @@ public class MinCostPath {
                 {1, 5, 3}
         };
 
-        System.out.print(minCost(cost, 2, 1));
+        System.out.println(minCost(cost, 2, 1));
+        System.out.println(minCost(cost, 1, 2));
     }
 
     private static int minCost(int[][] cost, int m, int n) {
