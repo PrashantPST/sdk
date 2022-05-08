@@ -41,13 +41,14 @@ public class BitArithmetic {
     }
 
     /**
+     * Write a function that takes an unsigned integer and returns the number of '1' bits it has (also known as the Hamming weight).
      * Brian Kernighan’s Algorithm:->
      * The beauty of this solution is the number of times it loops is equal to the number of set bits in a given integer.
      * @return the number of set bits for a given number
      */
     private static int countSetBits(int number) {
         int count = 0;
-        while (number > 0) {
+        while (number != 0) {
             number &= (number - 1) ;
             count++;
         }
